@@ -1,107 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>PS3 IRD Database</title>
-    <link rel="icon" href="favicon.png">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-        a {
-            text-decoration: none;
-            color: #ccc;
-        }
-        a:hover {
-            color: yellow;
-            font-weight: bold;
-        }
-        h1, h6 {
-            background-color: #333;
-            color: #fff;
-            padding: 20px;
-            margin: 0;
-            text-align: center;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        th, td {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 10px;
-        }
-        th {
-            cursor: pointer;
-            user-select: none;
-            background-color: #4CAF50;
-            color: #fff;
-        }
-        .ird_h {
-            width: 30px;
-        }
-        .dl_cell {
-            width: 50px;
-            text-align: center;
-        }
-        .image {
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-        }
-        .SearchBar {
-            padding: 10px;
-            font-size: 16px;
-            margin-bottom: -11px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        #tools {
-            font-size: 16px;
-            margin: 0;
-            background-color: #333;
-            padding: 10px;
-            text-align: center;
-        }
-    </style>
-</head>
-<body>
-    <h1><a href="https://www.psx-place.com/threads/3k3y-iso-tools-understanding-ps3-disk-encryption.29903/">IRD DATABASE</a></h1>
-    <div id="tools">
-        <a href="http://redump.org/discs/system/ps3/">Redump</a>
-        • <a href="https://github.com/Zarh/ird_tools/releases">ird tools</a>
-        • <a href="https://archive.org/details/IsoToolsV1.34.9.7z">3k3y-iso-tools</a>
-        • <a href="https://archive.org/details/ps3-iso-rebuilder-1.0.4.1">ps3-iso-rebuilder</a>
-        • <a href="http://forum.redump.org/topic/14035/various-ps3-tools/">Redump2ird</a>
-        • <a href="https://github.com/13xforever/ps3-disc-dumper">PS3 Disc Dumper</a>
-        • <a href="https://ps3.aldostools.org/dkey.html">aldostools DKEY database</a>
-        • <a href="https://ps3.aldostools.org/ird.html">aldostools IRD database</a>
-        • <a href="http://ps3ird.free.fr/">Zar's IRD database</a>
-    </div>
-    <h6>Made by <a href="https://github.com/FlexBy420">FlexBy</a></h6>
 <?php
 $selectedFolder = isset($_GET['folder']) ? $_GET['folder'] : 'redump';
-?>
-<!--<form method="get" action="">
-    <label for="folder">Select Source:</label>
-    <select name="folder" id="folder">
-        <option value="redump" <?php echo ($selectedFolder === 'redump') ? 'selected' : ''; ?>>Redump</option>
-        <option value="ps3.aldostools.org" <?php echo ($selectedFolder === 'ps3.aldostools.org') ? 'selected' : ''; ?>>ps3.aldostools.org</option>
-        <option value="ps3ird.free.fr" <?php echo ($selectedFolder === 'ps3ird.free.fr') ? 'selected' : ''; ?>>ps3ird.free.fr</option>
-    </select>
-    <input type="submit" value="Submit">
-</form>
--->
-<input class="SearchBar" id="txtSrchDB" onkeyup="doSearch()" type="text" placeholder="Search...">
-
-<?php
-
 function parseIRDFile($filePath) {
     try {
         // Check if the file is gzipped
@@ -159,8 +57,34 @@ function isGzipped($filePath) {
 
 $irdDirectory = __DIR__ . DIRECTORY_SEPARATOR . $selectedFolder;
 $irdFiles = glob($irdDirectory . '/*.ird');
-
+$totalIRDs = count($irdFiles);
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>PS3 IRD Database</title>
+    <link rel="icon" href="favicon.png">
+    <style>
+body{font-family:Arial,sans-serif;background-color:#f4f4f4;margin:0;padding:0}a{text-decoration:none;color:#ccc}a:hover{color:yellow;font-weight:bold}h1,h6{background-color:#333;color:#fff;padding:10px;margin:0;          text-align:center}h4{background-color:#333;color:#fff;margin:0;text-align:center}table{width:100%;border-collapse:collapse;margin-top:10px;background-color:#fff;box-shadow:0 0 10px rgba(0,0,0,.1)}th,td{border:1px solid #ddd;text-align:left;padding:10px}th{cursor:pointer;user-select:none;background-color:#4CAF50;color:#fff}.ird_h{width:30px}.dl_cell{width:50px;text-align:center}.image{width:20px;height:20px;cursor:pointer}.SearchBar{padding:10px;font-size:16px;margin-bottom:-11px;width:100%;box-sizing:border-box}#tools{font-size:16px;margin:0;background-color:#333;padding:10px;text-align:center}
+    </style>
+</head>
+<body>
+    <h1><a href="https://www.psx-place.com/threads/3k3y-iso-tools-understanding-ps3-disk-encryption.29903/">IRD DATABASE</a></h1>
+    <h4>Total IRDs: <?php echo $totalIRDs; ?></h4>
+    <div id="tools">
+        <a href="http://redump.org/discs/system/ps3/">Redump</a>
+        • <a href="https://github.com/Zarh/ird_tools/releases">ird tools</a>
+        • <a href="https://archive.org/details/IsoToolsV1.34.9.7z">3k3y-iso-tools</a>
+        • <a href="https://archive.org/details/ps3-iso-rebuilder-1.0.4.1">ps3-iso-rebuilder</a>
+        • <a href="http://forum.redump.org/topic/14035/various-ps3-tools/">Redump2ird</a>
+        • <a href="https://github.com/13xforever/ps3-disc-dumper">PS3 Disc Dumper</a>
+        • <a href="https://ps3.aldostools.org/dkey.html">aldostools DKEY database</a>
+        • <a href="https://ps3.aldostools.org/ird.html">aldostools IRD database</a>
+        • <a href="http://ps3ird.free.fr/">Zar's IRD database</a>
+    </div>
+    <h6>Made by <a href="https://github.com/FlexBy420">FlexBy</a></h6>
+
+<input class="SearchBar" id="txtSrchDB" onkeyup="doSearch()" type="text" placeholder="Search...">
 
 <table id="dbTable">
     <tr>
@@ -171,7 +95,7 @@ $irdFiles = glob($irdDirectory . '/*.ird');
         <th onclick="sortTable(4)" style="width:60px">Update</th>
     </tr>
 
-    <?php
+<?php
 foreach ($irdFiles as $irdFile) {
     $irdInfo = parseIRDFile($irdFile);
     if ($irdInfo !== null) {
