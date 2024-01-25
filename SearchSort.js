@@ -40,19 +40,15 @@ function sortTable(colID) {
         var r, i, x, y, len, b = 1;
         var rows = Array.from(table.rows).slice(1);
         len = rows.length;
-
+        
         rows.sort(function (a, b) {
             var aText = a.cells[colID].textContent || a.cells[colID].innerText;
             var bText = b.cells[colID].textContent || b.cells[colID].innerText;
-
             if (colID == 2) {
-                // For title column, use localeCompare for proper alphabetical sorting
                 return sortOrder ? bText.localeCompare(aText) : aText.localeCompare(bText);
             } else if (colID == 1) {
-                // For ID column, use a custom function to handle numeric parts separately
                 return sortOrder ? compareID(bText, aText) : compareID(aText, bText);
             } else {
-                // For other columns, use basic string comparison
                 return sortOrder ? aText.localeCompare(bText) : bText.localeCompare(aText);
             }
         });
@@ -62,8 +58,8 @@ function sortTable(colID) {
     }, 0);
 }
 
+// Function to compare IDs with numeric parts handled separately
 function compareID(id1, id2) {
-    // Custom function to compare IDs with numeric parts handled separately
     var parts1 = id1.split(/([0-9]+)/).filter(Boolean);
     var parts2 = id2.split(/([0-9]+)/).filter(Boolean);
 
