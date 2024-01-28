@@ -64,7 +64,7 @@ var jsonWriterOptions = new JsonWriterOptions
 #endif
 }; 
 
-await using var output = File.Open("all.json", new FileStreamOptions
+await using var output = File.Open("./pages/all.json", new FileStreamOptions
 {
     Mode = FileMode.Create,
     Access = FileAccess.Write,
