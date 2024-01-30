@@ -1,7 +1,110 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
-	<title>Placeholder</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"
+		integrity="sha512-b2QcS5SsA8tZodcDtGRELiGv5SaKSk1vDHDaQRda0htPYWZ6046lr3kJ5bAAQdpV2mmA/4v0wQF9MyU6/pDIAg=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css"
+		integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<title>IRD Database</title>
 </head>
 <body>
-	<p>test</p>
+	<div class="container">
+		<header>
+			<nav class="navbar navbar-expand-lg bg-body-tertiary">
+				<div class="container-fluid">
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+						aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+							<li class="nav-item">
+								<a class="nav-link active" aria-current="page" href="#">IRD Database</a>
+							</li>
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+									aria-expanded="false">
+									Sources
+								</a>
+								<ul class="dropdown-menu">
+									<li><a class="dropdown-item" href="http://redump.org/discs/system/ps3/" target="_blank" rel="external noopener">
+										<i class="bi bi-box-arrow-up-right" role="img" aria-label="External"></i>
+										Redump Disc Database for PS3</a></li>
+									<li><a class="dropdown-item" href="https://ps3.aldostools.org/dkey.html" target="_blank" rel="external noopener">
+										<i class="bi bi-box-arrow-up-right"></i>
+										aldostools DKEY database</a></li>
+									<li><a class="dropdown-item" href="https://ps3.aldostools.org/ird.html" target="_blank" rel="external noopener">
+										<i class="bi bi-box-arrow-up-right"></i>
+										aldostools IRD database</a></li>
+									<li><a class="dropdown-item" href="http://ps3ird.free.fr/" target="_blank" rel="external noopener">
+										<i class="bi bi-box-arrow-up-right"></i>
+										Zar's IRD database</a></li>
+								</ul>
+							</li>
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+									Tools
+								</a>
+								<ul class="dropdown-menu">
+									<li><a class="dropdown-item" href="https://forum.redump.org/topic/14035/various-ps3-tools/" target="_blank" rel="external noopener">
+										<i class="bi bi-box-arrow-up-right" role="img" aria-label="External"></i>
+										Redump2ird</a></li>
+									<li><a class="dropdown-item" href="https://github.com/Zarh/ird_tools/releases" target="_blank" rel="external noopener">
+										<i class="bi bi-box-arrow-up-right" role="img" aria-label="External"></i>
+										ird tools</a></li>
+									<li><a class="dropdown-item" href="https://archive.org/details/ps3-iso-rebuilder-1.0.4.1" target="_blank" rel="external noopener">
+										<i class="bi bi-box-arrow-up-right" role="img" aria-label="External"></i>
+										ps3-iso-rebuilder</a></li>
+									<li><a class="dropdown-item" href="https://github.com/13xforever/ps3-disc-dumper" target="_blank" rel="external noopener">
+										<i class="bi bi-box-arrow-up-right" role="img" aria-label="External"></i>
+										PS3 Disc Dumper</a></li>
+									<li><a class="dropdown-item" href="https://archive.org/details/IsoToolsV1.34.9.7z" target="_blank" rel="external noopener">
+										<i class="bi bi-box-arrow-up-right" role="img" aria-label="External"></i>
+										3k3y-iso-tools</a></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+					<span class="navbar-text" role="status">
+						<i class="bi bi-list-check me-1"></i>
+						<span id="ird_count">0</span>
+					</span>
+				</div>
+			</nav>
+		</header>
+
+		<div class="container mt-2">
+			<div id="loading_progress" class="progress" role="progressbar" aria-label="Data loading and processing progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+				<div id="loading_status" class="progress-bar" style="width: 0">Loading…</div>
+			</div>
+			<div id="table_container" class="row mt-2 table-responsive d-none">
+				<input id="filter" class="form-control form-control-lg" type="text" placeholder="Product code or title" aria-label="IRD filter">
+				<table class="table table-hover" id="table">
+				<thead>
+					<tr>
+						<th>Product Code</th>
+						<th>Title</th>
+						<th>App Ver</th>
+						<th>Game Ver</th>
+						<th>FW Ver</th>
+						<th>IRD</th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+				</table>
+			</div>
+		</div>
+
+		<footer></footer>
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"
+		integrity="sha512-X/YkDZyjTf4wyc2Vy16YGCPHwAY8rZJY+POgokZjQB2mhIRFJCckEGc6YyX9eNsPfn0PzThEuNs+uaomE5CO6A=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="app.js"></script>
 </body>
+</html>

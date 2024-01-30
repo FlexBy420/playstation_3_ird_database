@@ -74,10 +74,14 @@ await using var output = File.Open("./pages/all.json", new FileStreamOptions
 });
 await using var writer = new Utf8JsonWriter(output, jsonWriterOptions);
 writer.WriteStartObject();
-foreach (var (productCode, irdInfoList) in result.OrderBy(kvp => kvp.Key))
+foreach (var (productCode, irdInfoList) in result
+             .OrderBy(kvp => kvp.Value.Values.First().Title.TrimStart('['))
+             .ThenBy(kvp => kvp.Key))
 {
     writer.WriteStartArray(productCode);
-    foreach (var (crc, irdInfo) in irdInfoList.OrderBy(ii => ii.Value.GameVer).ThenBy(ii => ii.Value.AppVer))
+    foreach (var (crc, irdInfo) in irdInfoList
+                 .OrderBy(ii => ii.Value.GameVer)
+                 .ThenBy(ii => ii.Value.AppVer))
     {
         writer.WriteStartObject();
         writer.WriteString("title", irdInfo.Title);
