@@ -15,6 +15,7 @@ function SetupTheme() {
     setTheme();
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setTheme);
 }
+
 let filterTimeout: number|null = null;
 function Filter() {
     if (filterTimeout !== null) {
@@ -26,7 +27,9 @@ function Filter() {
         const table = document.getElementById('table') as HTMLTableElement;
         const tbody = table.tBodies[0];
         const stats = document.getElementById('ird_count') as HTMLSpanElement;
+        const clearButton = document.getElementById('clear_button') as HTMLElement;
         if (val.length > 0) {
+            clearButton.classList.remove('d-none');
             let filtered = 0;
             for(const row of tbody.rows) {
                 if (Array.from(row.cells).some(v => v.getAttribute('filter-value')?.includes(val))) {
@@ -38,12 +41,26 @@ function Filter() {
             }
             stats.textContent = `${filtered} of ${irdCount}`;
         } else {
+            clearButton.classList.add('d-none');
             for (const row of tbody.rows) {
                 row.classList.remove('d-none');
             }
             stats.textContent = `${irdCount}`;
         }
     }, 200);
+}
+
+function ClearFilter() {
+    const clearFilterBtn = document.getElementById('clear_button') as HTMLButtonElement;
+    clearFilterBtn.classList.add('d-none');
+    const filter = document.getElementById('filter') as HTMLInputElement;
+    filter.value = '';
+    filter.onchange?.call(filter);
+}
+function OnKb(event: KeyboardEvent) {
+    if (event.code === 'Escape') {
+        ClearFilter();
+    }
 }
 
 class IrdInfo {
@@ -100,7 +117,11 @@ async function LoadData() {
         const filter = document.getElementById('filter') as HTMLInputElement;
         filter.oninput = Filter;
         filter.onchange = Filter;
+        filter.onkeydown = OnKb;
+        const clearFilter = document.getElementById('clear_button') as HTMLButtonElement;
+        clearFilter.onclick = ClearFilter;
         tableContainer.classList.remove('d-none');
+        filter.focus();
     } else {
         response.statusText;
         //todo: show error box

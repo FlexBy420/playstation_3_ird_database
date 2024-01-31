@@ -22,7 +22,9 @@ function Filter() {
         const table = document.getElementById('table');
         const tbody = table.tBodies[0];
         const stats = document.getElementById('ird_count');
+        const clearButton = document.getElementById('clear_button');
         if (val.length > 0) {
+            clearButton.classList.remove('d-none');
             let filtered = 0;
             for (const row of tbody.rows) {
                 if (Array.from(row.cells).some(v => v.getAttribute('filter-value')?.includes(val))) {
@@ -36,12 +38,25 @@ function Filter() {
             stats.textContent = `${filtered} of ${irdCount}`;
         }
         else {
+            clearButton.classList.add('d-none');
             for (const row of tbody.rows) {
                 row.classList.remove('d-none');
             }
             stats.textContent = `${irdCount}`;
         }
     }, 200);
+}
+function ClearFilter() {
+    const clearFilterBtn = document.getElementById('clear_button');
+    clearFilterBtn.classList.add('d-none');
+    const filter = document.getElementById('filter');
+    filter.value = '';
+    filter.onchange?.call(filter);
+}
+function OnKb(event) {
+    if (event.code === 'Escape') {
+        ClearFilter();
+    }
 }
 class IrdInfo {
     title;
@@ -96,7 +111,11 @@ async function LoadData() {
         const filter = document.getElementById('filter');
         filter.oninput = Filter;
         filter.onchange = Filter;
+        filter.onkeydown = OnKb;
+        const clearFilter = document.getElementById('clear_button');
+        clearFilter.onclick = ClearFilter;
         tableContainer.classList.remove('d-none');
+        filter.focus();
     }
     else {
         response.statusText;

@@ -1,0 +1,9 @@
+input#filter {
+    padding-right: 55px;
+}
+.form-control-clear {
+    z-index: 10;
+    pointer-events: auto;
+    cursor: pointer;
+    transform: translate(-15px, 15px);
+}
