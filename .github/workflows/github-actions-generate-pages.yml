@@ -5,6 +5,7 @@ on:
       - main
     paths:
       - '**.ird'
+      - 'pages/**'
   workflow_dispatch:
 
 permissions:
