@@ -22,6 +22,8 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    env:
+      REPO_WEB_URL: '${{ github.server_url }}/${{ github.repository }}'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -31,6 +33,20 @@ jobs:
           dotnet-version: '8.0.x'
       - name: Generate JSONs
         run: dotnet run --configuration Release --project MetaGenerator/MetaGenerator/MetaGenerator.csproj
+      - name: Update base URL for scripts
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          find: '{{github.repo_web_url}}'
+          replace: '${{ env.REPO_WEB_URL }}'
+          regex: false
+          include: 'pages/**.js'
+      - name: Update branch name in scripts
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          find: '{{github.branch_name}}'
+          replace: '${{ github.ref_name }}'
+          regex: false
+          include: 'pages/**.js'
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact

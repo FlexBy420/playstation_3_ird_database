@@ -1,5 +1,5 @@
 'use strict';
-const downloadUrlBase = 'https://github.com/13xforever/ird-db/raw/main/';
+const downloadUrlBase = '{{github.repo_web_url}}/raw/{{github.branch_name}}/'; // replaced with e.g. https://github.com/FlexBy420/playstation_3_ird_database' and 'main'
 let initialized = false;
 let irdCount = 0;
 function Delay(ms) {
@@ -11,7 +11,7 @@ function SetupTheme() {
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setTheme);
 }
 let filterTimeout = null;
-function Filter(event) {
+function Filter() {
     if (filterTimeout !== null) {
         clearTimeout(filterTimeout);
     }
