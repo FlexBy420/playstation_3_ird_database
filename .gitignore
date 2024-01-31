@@ -1,0 +1,7 @@
+# Specify filepatterns you want git to ignore.
+bin/
+obj/
+logs/
+all*.json
+*.gz
+.idea/
