@@ -1,5 +1,6 @@
 'use strict';
-const downloadUrlBase = '{{github.repo_web_url}}/raw/{{github.branch_name}}/'; // replaced with e.g. https://github.com/FlexBy420/playstation_3_ird_database' and 'main'
+//const downloadUrlBase = 'https://github.com/FlexBy420/playstation_3_ird_database/raw/main/';
+const downloadUrlBase = '{{github.repo_web_url}}/raw/{{github.branch_name}}/';
 let initialized = false;
 let irdCount = 0;
 function Delay(ms) {
@@ -77,7 +78,7 @@ async function LoadData() {
                 row.insertCell().textContent = irdInfo['app-ver'];
                 row.insertCell().textContent = irdInfo['game-ver'];
                 row.insertCell().textContent = irdInfo['fw-ver'];
-                row.insertCell().innerHTML = `<a href="${downloadUrlBase}${irdInfo.link}" class="icon-link" target="_blank" rel="external noopener"><i class="bi bi-download"></i><span class="d-none d-xl-block"> ${filename}</span></a>`;
+                row.insertCell().innerHTML = `<a href="${downloadUrlBase}${irdInfo.link}" class="icon-link" download filename="${filename}" rel="external noopener" referrerpolicy="origin"><i class="bi bi-download"></i><span class="d-none d-xl-block"> ${filename}</span></a>`;
                 irdCount++;
             }
             i++;
