@@ -90,7 +90,7 @@
 			<div id="table_container" class="row mt-2 table-responsive d-none">
 				<div class="p-2 position-relative">
 					<input id="filter" class="form-control form-control-lg" type="text" placeholder="Product code or title" aria-label="IRD filter">
-					<button id="clear_button" type="button" class="btn rounded-pill form-control-clear position-absolute top-0 end-0 d-none">
+					<button id="clear_button" type="button" class="btn rounded-pill text-secondary form-control-clear position-absolute top-0 end-0 d-none">
 						<span class="bi bi-x-circle-fill"></span>
 					</button>
 				</div>
@@ -111,7 +111,11 @@
 			</div>
 		</div>
 
-		<footer></footer>
+		<footer>
+			<div class="row">
+				<span id="version" class="text-body-tertiary text-end">{{github.branch_name}} // {{github.sha}}</span>
+			</div>
+		</footer>
 	</div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"
 		integrity="sha512-X/YkDZyjTf4wyc2Vy16YGCPHwAY8rZJY+POgokZjQB2mhIRFJCckEGc6YyX9eNsPfn0PzThEuNs+uaomE5CO6A=="

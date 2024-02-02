@@ -48,6 +48,13 @@ jobs:
           replace: '${{ github.ref_name }}'
           regex: false
           include: 'pages/**.js'
+      - name: Update commit hash in scripts
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          find: '{{github.sha}}'
+          replace: '${{ github.sha }}'
+          regex: false
+          include: 'pages/**.js'
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact

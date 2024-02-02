@@ -1,7 +1,9 @@
 'use strict';
 
 //const downloadUrlBase = 'https://github.com/FlexBy420/playstation_3_ird_database/raw/main/';
-const downloadUrlBase = '{{github.repo_web_url}}/raw/{{github.branch_name}}/';
+const branch = '{{github.branch_name}}';
+const commit = '{{github.sha}}';
+const downloadUrlBase = `{{github.repo_web_url}}/raw/${branch}`;
 
 let initialized = false;
 let irdCount = 0;
@@ -72,7 +74,7 @@ class IrdInfo {
 }
 
 async function LoadData() {
-    const response = await window.fetch('all.json');
+    const response = await window.fetch(`all.json?v=${commit}`);
     if (response.ok) {
         const data = await response.json();
         const progressBar = document.getElementById('loading_progress') as HTMLDivElement;
@@ -131,6 +133,8 @@ async function LoadData() {
 async function Init() {
     if (!initialized) {
         initialized = true;
+        const ver = document.getElementById('version') as HTMLSpanElement;
+        ver.textContent = `${branch} // ${commit}`;
         SetupTheme();
         await LoadData();
     }
