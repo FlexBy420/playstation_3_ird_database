@@ -2,7 +2,7 @@
 //const downloadUrlBase = 'https://github.com/FlexBy420/playstation_3_ird_database/raw/main/';
 const branch = '{{github.branch_name}}';
 const commit = '{{github.sha}}';
-const downloadUrlBase = `{{github.repo_web_url}}/raw/${branch}`;
+const downloadUrlBase = `{{github.repo_web_url}}/raw/${branch}/`;
 let initialized = false;
 let irdCount = 0;
 function Delay(ms) {
