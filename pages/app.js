@@ -1,5 +1,4 @@
 'use strict';
-//const downloadUrlBase = 'https://github.com/FlexBy420/playstation_3_ird_database/raw/main/';
 const branch = '{{github.branch_name}}';
 const commit = '{{github.sha}}';
 const downloadUrlBase = `{{github.repo_web_url}}/raw/${branch}/`;
@@ -87,10 +86,8 @@ async function LoadData() {
             for (const irdInfo of irdInfoList) {
                 const linkSegments = irdInfo.link.split('/');
                 const filename = linkSegments[linkSegments.length - 1];
-                // code, title, app, game, fw, link
                 const row = tbody.insertRow();
                 const codeCell = row.insertCell();
-                //codeCell.classList.add('font-monospace');
                 codeCell.textContent = code;
                 codeCell.setAttribute('filter-value', code.toLowerCase());
                 const titleCell = row.insertCell();
@@ -125,7 +122,6 @@ async function LoadData() {
     }
     else {
         response.statusText;
-        //todo: show error box
     }
 }
 async function Init() {
