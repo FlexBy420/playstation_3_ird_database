@@ -85,29 +85,23 @@ foreach (var (productCode, irdInfoList) in result
                  .Replace("™", "")
                  .Replace(" ®", "")
                  .Replace("®", "")
-                 .Replace("１", "1") // some fullwidth → ascii
-                 .Replace("２", "2")
-                 .Replace("３", "3")
-                 .Replace("４", "4")
-                 .Replace("５", "5")
-                 .Replace("６", "6")
-                 .Replace("７", "7")
-                 .Replace("８", "8")
-                 .Replace("９", "9")
-                 .Replace("０", "0")
-                 .Replace("！", "!")
-                 .Replace("＆", "&")
+                 .ReplaceFullWidth()
                  .Replace("\u2160", "I")
                  .Replace("\u2161", "II")
                  .Replace("\u2162", "III")
                  .Replace("\u2163", "IV")
                  .Replace("\u2164", "V")
-                 .Replace("\uff5e", "~")
                  .Replace("\u3000", " ")
+                 .Replace("·", "・") // greek middle dot???
+                 .Replace("･", "・") // half-width
                  .Replace("CORE4", "CORE 4", StringComparison.OrdinalIgnoreCase) // game-specific 
                  .Replace("BAЛЛ•И", "ВАЛЛИ", StringComparison.OrdinalIgnoreCase) 
                  .Replace("Disgaea3", "Disgaea 3", StringComparison.OrdinalIgnoreCase) 
                  .Replace("Disgaea4", "Disgaea 4", StringComparison.OrdinalIgnoreCase) 
+                 .Replace("L@ve", "Love", StringComparison.OrdinalIgnoreCase) 
+                 .Replace("PROTOTYPE2", "PROTOTYPE 2", StringComparison.OrdinalIgnoreCase) 
+                 .Replace("SingStar Vol.", "SingStar Vol ", StringComparison.OrdinalIgnoreCase) 
+                 .Replace("skate.", "skate 1", StringComparison.OrdinalIgnoreCase) 
                  .Trim(), // extra whitespaces
                  StringComparer.OrdinalIgnoreCase
              ).ThenBy(kvp => kvp.Key))

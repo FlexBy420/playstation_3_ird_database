@@ -6,6 +6,7 @@ on:
     paths:
       - '**.ird'
       - 'pages/**'
+      - 'MetaGenerator/**'
   workflow_dispatch:
 
 permissions:
