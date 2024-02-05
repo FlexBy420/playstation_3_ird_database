@@ -13,6 +13,10 @@ function SetupTheme() {
     setTheme();
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setTheme);
 }
+function EnableTooltips() {
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+}
 let filterTimeout = null;
 function Filter() {
     if (filterTimeout !== null) {
@@ -130,6 +134,7 @@ async function Init() {
         const ver = document.getElementById('version');
         ver.textContent = `${branch} // ${commit}`;
         SetupTheme();
+        EnableTooltips();
         await LoadData();
     }
 }

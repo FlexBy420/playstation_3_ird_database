@@ -5,6 +5,13 @@ const branch = '{{github.branch_name}}';
 const commit = '{{github.sha}}';
 const downloadUrlBase = `{{github.repo_web_url}}/raw/${branch}/`;
 
+// TypeScript type definition for compiler
+declare namespace bootstrap {
+    class Tooltip {
+        constructor(el: Element);
+    }
+}
+
 let initialized = false;
 let irdCount = 0;
 
@@ -16,6 +23,11 @@ function SetupTheme() {
     const setTheme = () => document.documentElement.setAttribute('data-bs-theme', window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
     setTheme();
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setTheme);
+}
+
+function EnableTooltips() {
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
 }
 
 let filterTimeout: number|null = null;
@@ -136,6 +148,7 @@ async function Init() {
         const ver = document.getElementById('version') as HTMLSpanElement;
         ver.textContent = `${branch} // ${commit}`;
         SetupTheme();
+        EnableTooltips();
         await LoadData();
     }
 }
