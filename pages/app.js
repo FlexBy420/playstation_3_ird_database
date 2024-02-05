@@ -1,5 +1,4 @@
 'use strict';
-//const downloadUrlBase = 'https://github.com/FlexBy420/playstation_3_ird_database/raw/main/';
 const branch = '{{github.branch_name}}';
 const commit = '{{github.sha}}';
 const downloadUrlBase = `{{github.repo_web_url}}/raw/${branch}/`;
@@ -12,6 +11,10 @@ function SetupTheme() {
     const setTheme = () => document.documentElement.setAttribute('data-bs-theme', window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
     setTheme();
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setTheme);
+}
+function EnableTooltips() {
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
 }
 let filterTimeout = null;
 function Filter() {
@@ -83,10 +86,8 @@ async function LoadData() {
             for (const irdInfo of irdInfoList) {
                 const linkSegments = irdInfo.link.split('/');
                 const filename = linkSegments[linkSegments.length - 1];
-                // code, title, app, game, fw, link
                 const row = tbody.insertRow();
                 const codeCell = row.insertCell();
-                //codeCell.classList.add('font-monospace');
                 codeCell.textContent = code;
                 codeCell.setAttribute('filter-value', code.toLowerCase());
                 const titleCell = row.insertCell();
@@ -121,7 +122,6 @@ async function LoadData() {
     }
     else {
         response.statusText;
-        //todo: show error box
     }
 }
 async function Init() {
@@ -130,6 +130,7 @@ async function Init() {
         const ver = document.getElementById('version');
         ver.textContent = `${branch} // ${commit}`;
         SetupTheme();
+        EnableTooltips();
         await LoadData();
     }
 }

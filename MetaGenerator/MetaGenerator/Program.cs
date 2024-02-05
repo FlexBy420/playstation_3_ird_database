@@ -75,8 +75,42 @@ await using var output = File.Open("./pages/all.json", new FileStreamOptions
 await using var writer = new Utf8JsonWriter(output, jsonWriterOptions);
 writer.WriteStartObject();
 foreach (var (productCode, irdInfoList) in result
-             .OrderBy(kvp => kvp.Value.Values.First().Title.TrimStart('['))
-             .ThenBy(kvp => kvp.Key))
+             .OrderBy(
+                 kvp => kvp.Value.Values.First().Title
+                 .Replace("[", "") // [PROTOTYPE2]
+                 .Replace("]", "")
+                 .Replace("(tm)", "", StringComparison.OrdinalIgnoreCase)
+                 .Replace("(r)", "", StringComparison.OrdinalIgnoreCase)
+                 .Replace(" ™", "")
+                 .Replace("™", "")
+                 .Replace(" ®", "")
+                 .Replace("®", "")
+                 .Replace("１", "1") // some fullwidth → ascii
+                 .Replace("２", "2")
+                 .Replace("３", "3")
+                 .Replace("４", "4")
+                 .Replace("５", "5")
+                 .Replace("６", "6")
+                 .Replace("７", "7")
+                 .Replace("８", "8")
+                 .Replace("９", "9")
+                 .Replace("０", "0")
+                 .Replace("！", "!")
+                 .Replace("＆", "&")
+                 .Replace("\u2160", "I")
+                 .Replace("\u2161", "II")
+                 .Replace("\u2162", "III")
+                 .Replace("\u2163", "IV")
+                 .Replace("\u2164", "V")
+                 .Replace("\uff5e", "~")
+                 .Replace("\u3000", " ")
+                 .Replace("CORE4", "CORE 4", StringComparison.OrdinalIgnoreCase) // game-specific 
+                 .Replace("BAЛЛ•И", "ВАЛЛИ", StringComparison.OrdinalIgnoreCase) 
+                 .Replace("Disgaea3", "Disgaea 3", StringComparison.OrdinalIgnoreCase) 
+                 .Replace("Disgaea4", "Disgaea 4", StringComparison.OrdinalIgnoreCase) 
+                 .Trim(), // extra whitespaces
+                 StringComparer.OrdinalIgnoreCase
+             ).ThenBy(kvp => kvp.Key))
 {
     writer.WriteStartArray(productCode);
     foreach (var (crc, irdInfo) in irdInfoList
