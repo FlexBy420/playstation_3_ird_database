@@ -86,14 +86,21 @@ foreach (var (productCode, irdInfoList) in result
                  .Replace(" ®", "")
                  .Replace("®", "")
                  .ReplaceFullWidth()
-                 .Replace("\u2160", "I")
+                 .ReplaceKana()
+                 .Replace('\u2160', 'I')
                  .Replace("\u2161", "II")
                  .Replace("\u2162", "III")
                  .Replace("\u2163", "IV")
-                 .Replace("\u2164", "V")
-                 .Replace("\u3000", " ")
-                 .Replace("·", "・") // greek middle dot???
-                 .Replace("･", "・") // half-width
+                 .Replace('\u2164', 'V')
+                 .Replace('\u3000', ' ')
+                 .Replace("\r\n", " ")
+                 .Replace('\r', ' ')
+                 .Replace('\n', ' ')
+                 .Replace("    ", " ")
+                 .Replace("   ", " ")
+                 .Replace("  ", " ")
+                 .Replace('·', '・') // greek middle dot???
+                 .Replace('･', '・') // half-width
                  .Replace("CORE4", "CORE 4", StringComparison.OrdinalIgnoreCase) // game-specific 
                  .Replace("BAЛЛ•И", "ВАЛЛИ", StringComparison.OrdinalIgnoreCase) 
                  .Replace("Disgaea3", "Disgaea 3", StringComparison.OrdinalIgnoreCase) 
