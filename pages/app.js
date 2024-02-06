@@ -21,8 +21,11 @@ function CleanTitle(title) {
     const arrLen = charr.length;
     for (let i = 0; i < arrLen; i++) {
         const ch = charr[i];
-        if (ch >= 0xff01 && ch <= 0xff5e) {
+        if (ch > 0xff00 && ch <= 0xff5e) {
             charr[i] = ch - 0xfee0;
+        }
+        else if (ch > 0x30a0 && ch <= 0x30f6) {
+            charr[i] = ch - 0x0060;
         }
     }
     return charr.map(c => String.fromCharCode(c)).join("")
@@ -75,7 +78,7 @@ function Filter() {
             clearButton.classList.remove('d-none');
             let filtered = 0;
             for (const row of tbody.rows) {
-                if (Array.from(row.cells).some(v => v.getAttribute('filter-value')?.includes(val))) {
+                if (Array.from(row.cells).some(v => v.getAttribute('filter-value')?.includes(val) || v.textContent?.includes(val))) {
                     row.classList.remove('d-none');
                     filtered++;
                 }

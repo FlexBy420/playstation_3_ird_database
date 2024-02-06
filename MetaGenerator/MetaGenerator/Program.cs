@@ -86,6 +86,7 @@ foreach (var (productCode, irdInfoList) in result
                  .Replace(" ®", "")
                  .Replace("®", "")
                  .ReplaceFullWidth()
+                 .ReplaceKana()
                  .Replace('\u2160', 'I')
                  .Replace("\u2161", "II")
                  .Replace("\u2162", "III")

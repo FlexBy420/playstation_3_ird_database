@@ -35,9 +35,12 @@ function CleanTitle(title: string): string {
     const arrLen = charr.length;
     for (let i=0; i<arrLen; i++) {
         const ch = charr[i];
-        // replace full-width characters from ! to ~
-        if (ch >= 0xff01 && ch <= 0xff5e) {
+        if (ch > 0xff00 && ch <= 0xff5e) {
+            // replace full-width characters from ! to ~
             charr[i] = ch - 0xfee0; // ch - 0xff00 + 0x0020
+        } else if (ch > 0x30a0 && ch <= 0x30f6) {
+            // replace katakana with hiragana (helps with filter during input)
+            charr[i] = ch - 0x0060; // ch - 0x30a0 + 0x3040
         }
     }
     return charr.map(c => String.fromCharCode(c)).join("")
@@ -96,7 +99,7 @@ function Filter() {
             clearButton.classList.remove('d-none');
             let filtered = 0;
             for(const row of tbody.rows) {
-                if (Array.from(row.cells).some(v => v.getAttribute('filter-value')?.includes(val))) {
+                if (Array.from(row.cells).some(v => v.getAttribute('filter-value')?.includes(val) || v.textContent?.includes(val))) {
                     row.classList.remove('d-none');
                     filtered++;
                 } else {
