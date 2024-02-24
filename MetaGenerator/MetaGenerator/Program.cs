@@ -110,6 +110,19 @@ foreach (var (productCode, irdInfoList) in result
                  .Replace("SingStar Vol.", "SingStar Vol ", StringComparison.OrdinalIgnoreCase) 
                  .Replace("skate.", "skate 1", StringComparison.OrdinalIgnoreCase) 
                  .Replace("Spirits4", "Spirits 4", StringComparison.OrdinalIgnoreCase)
+                 .Replace("FIFA09", "FIFA 09", StringComparison.OrdinalIgnoreCase)
+                 .Replace("GranTurismo", "GRAN TURISMO 5 Prologue", StringComparison.OrdinalIgnoreCase) // BCKS10030
+                 .Replace("GTA San Andreas", "Grand Theft Auto: San Andreas", StringComparison.OrdinalIgnoreCase)
+                 .Replace("HEAVY FIRE SHATTERED SPEAR", "Heavy Fire: Shattered Spear", StringComparison.OrdinalIgnoreCase)
+                 .Replace("HEAVY FIRE AFGHANISTAN", "Heavy Fire: Afghanistan", StringComparison.OrdinalIgnoreCase)
+                 .Replace("Hyperdimention Neptune mk2", "Hyperdimension Neptunia mk2", StringComparison.OrdinalIgnoreCase) // BLKS20353
+                 .Replace("Hyperdimension Neptune mk2", "Hyperdimension Neptunia mk2", StringComparison.OrdinalIgnoreCase) // BLJM60992
+                 .Replace("Hyperdimension Neptune", "Hyperdimension Neptunia", StringComparison.OrdinalIgnoreCase)
+                 .Replace("NeptuneV", "Neptune V", StringComparison.OrdinalIgnoreCase)
+                 .Replace("InitialD EXTREME STAGE", "INITIAL D EXTREME STAGE", StringComparison.OrdinalIgnoreCase) // BLJM60055
+                 .Replace("Modern Warfare 2", "Call of Duty: Modern Warfare 2", StringComparison.OrdinalIgnoreCase)
+                 .Replace("MotoGP08", "MotoGP 08", StringComparison.OrdinalIgnoreCase)
+                 .Replace("Yoostar2", "Yoostar 2", StringComparison.OrdinalIgnoreCase)
                  .Trim(), // extra whitespaces
                  StringComparer.OrdinalIgnoreCase
              ).ThenBy(kvp => kvp.Key))
