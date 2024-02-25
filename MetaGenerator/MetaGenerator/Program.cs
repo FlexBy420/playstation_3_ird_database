@@ -109,6 +109,7 @@ foreach (var (productCode, irdInfoList) in result
                  .Replace("PROTOTYPE2", "PROTOTYPE 2", StringComparison.OrdinalIgnoreCase) 
                  .Replace("SingStar Vol.", "SingStar Vol ", StringComparison.OrdinalIgnoreCase) 
                  .Replace("skate.", "skate 1", StringComparison.OrdinalIgnoreCase) 
+                 .Replace("skate2", "skate 2", StringComparison.OrdinalIgnoreCase)
                  .Replace("Spirits4", "Spirits 4", StringComparison.OrdinalIgnoreCase)
                  .Replace("FIFA09", "FIFA 09", StringComparison.OrdinalIgnoreCase)
                  .Replace("GranTurismo", "GRAN TURISMO 5 Prologue", StringComparison.OrdinalIgnoreCase) // BCKS10030
