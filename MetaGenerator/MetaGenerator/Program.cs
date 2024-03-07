@@ -29,18 +29,18 @@ var maxParallel = 1;
 var maxParallel = Environment.ProcessorCount;
 #endif
 
-var productTitleMapping = new Dictionary<string, List<string>>
+var productTitleMapping = new Dictionary<string, string>
 {
-    { "Assassin's Creed: Brotherhood", new List<string> { "BLES00909", "BLES00910", "BLES00911", "BLJM60250", "BLUS30537" } },
-    { "Assassin's Creed: Revelations", new List<string> { "BLES01384", "BLES01385", "BLES01466", "BLES01467", "BLJM60412", "BLJM60573", "BLJM67011", "BLUS30808", "BLUS30905", "BLUS31145" } },
-    { "ARMORED CORE 4", new List<string> { "BLES00039", "BLJM60012" } },
-    { "3D Collection", new List<string> { "BCAS20136" } },
-    { "Puppeteer Demo", new List<string> { "BCJX96010" } },
-    { "PlayStation 3 Special Demo Disc", new List<string> { "BCJX96004" } },
-    { "PlayStation 3 Big Hit Titles' Demo Collection Vol. 2", new List<string> { "BCAS20127" } },
-    { "PlayStation 3 Big Hit Titles' Demo Collection Vol. 3", new List<string> { "BCAS20158" } },
-    { "All About PlayStation Game Hits Vol. 1", new List<string> { "BCAS20226" } },
-    { "Demo & Trailer Collection for Asia", new List<string> { "BCAX90001" } },
+    { "Assassin's Creed: Brotherhood", "BLES00909, BLES00910, BLES00911, BLJM60250, BLUS30537" },
+    { "Assassin's Creed: Revelations", "BLES01384, BLES01385, BLES01466, BLES01467, BLJM60412, BLJM60573, BLJM67011, BLUS30808, BLUS30905, BLUS31145" },
+    { "ARMORED CORE 4", "BLES00039, BLJM60012" },
+    { "3D Collection", "BCAS20136" },
+    { "Puppeteer Demo", "BCJX96010" },
+    { "PlayStation 3 Special Demo Disc", "BCJX96004" },
+    { "PlayStation 3 Big Hit Titles' Demo Collection Vol. 2", "BCAS20127" },
+    { "PlayStation 3 Big Hit Titles' Demo Collection Vol. 3", "BCAS20158" },
+    { "All About PlayStation Game Hits Vol. 1", "BCAS20226" },
+    { "Demo & Trailer Collection for Asia", "BCAX90001" },
 };
 
 string ReplaceDisplayedTitle(string productCode, string title)
