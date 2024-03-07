@@ -221,5 +221,9 @@ public static class ProductTitleMapping
         { "BLJM60411", "Suigetsu 2" },
         { "BLJM60019", "Winning Post 7 MAXIMUM 2007" },
         { "BLJM60067", "Winning Post 7 MAXIMUM 2008" },
+        { "BCED00393", "Gran Turismo 5: Prologue: Special Event Version: GT by Citroën" },
+        { "BLJM60018", "Gundam Musou" },
+        { "BLES00146", "The Simpsons Game" },
+        { "BLES01245", "Cars 2" },
     };
 }
