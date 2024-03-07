@@ -31,25 +31,35 @@ var maxParallel = Environment.ProcessorCount;
 
 var productTitleMapping = new Dictionary<string, string>
 {
-    { "Assassin's Creed: Brotherhood", "BLES00909, BLES00910, BLES00911, BLJM60250, BLUS30537" },
-    { "Assassin's Creed: Revelations", "BLES01384, BLES01385, BLES01466, BLES01467, BLJM60412, BLJM60573, BLJM67011, BLUS30808, BLUS30905, BLUS31145" },
-    { "ARMORED CORE 4", "BLES00039, BLJM60012" },
-    { "3D Collection", "BCAS20136" },
-    { "Puppeteer Demo", "BCJX96010" },
-    { "PlayStation 3 Special Demo Disc", "BCJX96004" },
-    { "PlayStation 3 Big Hit Titles' Demo Collection Vol. 2", "BCAS20127" },
-    { "PlayStation 3 Big Hit Titles' Demo Collection Vol. 3", "BCAS20158" },
-    { "All About PlayStation Game Hits Vol. 1", "BCAS20226" },
-    { "Demo & Trailer Collection for Asia", "BCAX90001" },
+    { "BCAS20136", "3D Collection" },
+    { "BCJX96004", "PlayStation 3 Special Demo Disc" },
+    { "BCJX96010", "Puppeteer Demo" },
+    { "BLES00909", "Assassin's Creed: Brotherhood" },
+    { "BLES00910", "Assassin's Creed: Brotherhood" },
+    { "BLES00911", "Assassin's Creed: Brotherhood" },
+    { "BLJM60250", "Assassin's Creed: Brotherhood" },
+    { "BLUS30537", "Assassin's Creed: Brotherhood" },
+    { "BLES01384", "Assassin's Creed: Revelations" },
+    { "BLES01385", "Assassin's Creed: Revelations" },
+    { "BLES01466", "Assassin's Creed: Revelations" },
+    { "BLES01467", "Assassin's Creed: Revelations" },
+    { "BLJM60412", "Assassin's Creed: Revelations" },
+    { "BLJM60573", "Assassin's Creed: Revelations" },
+    { "BLJM67011", "Assassin's Creed: Revelations" },
+    { "BLUS30808", "Assassin's Creed: Revelations" },
+    { "BLUS30905", "Assassin's Creed: Revelations" },
+    { "BLUS31145", "Assassin's Creed: Revelations" },
+    { "BLES00039", "ARMORED CORE 4" },
+    { "BLJM60012", "ARMORED CORE 4" },
 };
 
-string[] ReplaceDisplayedTitle(string productCode, string title)
+string ReplaceDisplayedTitle(string productCode, string title)
 {
     if (productTitleMapping.ContainsKey(productCode))
     {
-        return productTitleMapping[productCode].Split(", ");
+        return productTitleMapping[productCode];
     }
-    return new string[] { title };
+    return title;
 }
 
 var result = new ConcurrentDictionary<string, ConcurrentDictionary<uint, IrdInfo>>();
