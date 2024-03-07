@@ -134,7 +134,7 @@ public static class ProductTitleMapping
         { "BLJM85002", "けいおん！ 放課後ライブ！！ HD Ver." },
         { "BLJM85004", "英雄伝説　空の軌跡FC:改　HD Edition" },
         { "BLJM85005", "英雄伝説 空の軌跡SC:改 HD EDITION" },
-        { "BLJM85006", "英雄伝説　空の軌跡ｔｈｅ　３ｒｄ：改　HD Edition" }, // end psp remasters
+        { "BLJM85006", "英雄伝説　空の軌跡ｔｈｅ　３ｒｄ：改　HD" }, // end psp remasters
         { "BLJS10123", "エンジェル戦記" },
         { "BLJS10124", "エンジェルラブオンライン" },
         { "BLJS10222", "テラリア" },
