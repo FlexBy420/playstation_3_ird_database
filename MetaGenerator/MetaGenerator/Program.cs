@@ -43,12 +43,11 @@ var productTitleMapping = new Dictionary<string, List<string>>
     { "Demo & Trailer Collection for Asia", new List<string> { "BCAX90001" } },
 };
 
-
 string ReplaceDisplayedTitle(string productCode, string title)
 {
     if (productTitleMapping.ContainsKey(productCode))
     {
-        return productTitleMapping[productCode];
+        return string.Join(" ", productTitleMapping[productCode]);
     }
     return title;
 }
