@@ -43,13 +43,13 @@ var productTitleMapping = new Dictionary<string, string>
     { "Demo & Trailer Collection for Asia", "BCAX90001" },
 };
 
-string ReplaceDisplayedTitle(string productCode, string title)
+string[] ReplaceDisplayedTitle(string productCode, string title)
 {
     if (productTitleMapping.ContainsKey(productCode))
     {
-        return productTitleMapping[productCode];
+        return productTitleMapping[productCode].Split(", ");
     }
-    return title;
+    return new string[] { title };
 }
 
 var result = new ConcurrentDictionary<string, ConcurrentDictionary<uint, IrdInfo>>();
