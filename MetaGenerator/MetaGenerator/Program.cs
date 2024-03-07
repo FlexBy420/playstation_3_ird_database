@@ -1,10 +1,13 @@
+using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Text.Encodings.Web;
 using MetaGenerator;
 using MetaGenerator.IrdFormat;
 using Microsoft.IO;
 using System.Text.Json;
-using ProductTitleMapping;
 
 var baseDir = ".";
 var baseDownloadUrl = "https://github.com/13xforever/ird-db/raw/main/";
@@ -30,14 +33,13 @@ var maxParallel = 1;
 var maxParallel = Environment.ProcessorCount;
 #endif
 
-var productTitleMapping = ProductTitleMapping.Mapping;
-string ReplaceDisplayedTitle(string productCode, string title)
+string[] ReplaceDisplayedTitle(string productCode, string title)
 {
-    if (productTitleMapping.ContainsKey(productCode))
+    if (ProductTitleMapping.Mapping.ContainsKey(productCode))
     {
-        return productTitleMapping[productCode];
+        return ProductTitleMapping.Mapping[productCode].Split(", ");
     }
-    return title;
+    return new string[] { title };
 }
 
 var result = new ConcurrentDictionary<string, ConcurrentDictionary<uint, IrdInfo>>();
@@ -98,46 +100,46 @@ foreach (var (productCode, irdInfoList) in result
     .ThenBy(kvp => kvp.Key, StringComparer.OrdinalIgnoreCase)
     .OrderBy(
         kvp => kvp.Value.Values.First().Title
-        .Replace("[", "") // [PROTOTYPE2]
-        .Replace("]", "")
-        .Replace("(tm)", "", StringComparison.OrdinalIgnoreCase)
-        .Replace("(r)", "", StringComparison.OrdinalIgnoreCase)
-        .Replace(" ™", "")
-        .Replace("™", "")
-        .Replace(" ®", "")
-        .Replace("®", "")
-        .ReplaceFullWidth()
-        .ReplaceKana()
-        .Replace('\u2160', 'I')
-        .Replace("\u2161", "II")
-        .Replace("\u2162", "III")
-        .Replace("\u2163", "IV")
-        .Replace('\u2164', 'V')
-        .Replace('\u3000', ' ')
-        .Replace("\r\n", " ")
-        .Replace('\r', ' ')
-        .Replace('\n', ' ')
-        .Replace("    ", " ")
-        .Replace("   ", " ")
-        .Replace("  ", " ")
-        .Replace('·', '・') // greek middle dot???
-        .Replace('･', '・') // half-width
-        .Trim(), // extra whitespaces
+            .Replace("[", "") // [PROTOTYPE2]
+            .Replace("]", "")
+            .Replace("(tm)", "", StringComparison.OrdinalIgnoreCase)
+            .Replace("(r)", "", StringComparison.OrdinalIgnoreCase)
+            .Replace(" ™", "")
+            .Replace("™", "")
+            .Replace(" ®", "")
+            .Replace("®", "")
+            .ReplaceFullWidth()
+            .ReplaceKana()
+            .Replace('\u2160', 'I')
+            .Replace("\u2161", "II")
+            .Replace("\u2162", "III")
+            .Replace("\u2163", "IV")
+            .Replace('\u2164', 'V')
+            .Replace('\u3000', ' ')
+            .Replace("\r\n", " ")
+            .Replace('\r', ' ')
+            .Replace('\n', ' ')
+            .Replace("    ", " ")
+            .Replace("   ", " ")
+            .Replace("  ", " ")
+            .Replace('·', '・') // greek middle dot???
+            .Replace('･', '・') // half-width
+            .Trim(), // extra whitespaces
         StringComparer.OrdinalIgnoreCase
     ).ThenBy(kvp => kvp.Key))
 {
     writer.WriteStartArray(productCode);
     foreach (var (crc, irdInfo) in irdInfoList
-                 .OrderBy(ii => ii.Value.GameVer)
-                 .ThenBy(ii => ii.Value.AppVer))
+        .OrderBy(ii => ii.Value.GameVer)
+        .ThenBy(ii => ii.Value.AppVer))
     {
         writer.WriteStartObject();
         writer.WriteString("title", irdInfo.Title);
-        if (irdInfo.FwVer is {Length: >0} fwVer and not "\0\0\0\0")
+        if (irdInfo.FwVer is { Length: > 0 } fwVer and not "\0\0\0\0")
             writer.WriteString("fw-ver", fwVer);
-        if (irdInfo.GameVer is {Length: >0} gameVer and not "\0\0\0\0\0")
+        if (irdInfo.GameVer is { Length: > 0 } gameVer and not "\0\0\0\0\0")
             writer.WriteString("game-ver", gameVer);
-        if (irdInfo.AppVer is {Length: >0} appVer and not "\0\0\0\0\0")
+        if (irdInfo.AppVer is { Length: > 0 } appVer and not "\0\0\0\0\0")
             writer.WriteString("app-ver", appVer);
 #if DEBUG
         writer.WriteString("ird-crc32", crc.ToString("x8"));
