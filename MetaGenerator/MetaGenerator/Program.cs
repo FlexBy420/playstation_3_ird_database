@@ -123,7 +123,13 @@ foreach (var (productCode, irdInfoList) in result
             .Replace("   ", " ")
             .Replace("  ", " ")
             .Replace('·', '・') // greek middle dot???
-            .Replace('･', '・') // half-width
+            .Replace('･', '・') // half-fwidth
+            .Replace('Σ', 'Sigma ')
+            .Replace("skate.", "skate 1", StringComparison.OrdinalIgnoreCase)
+            .Replace("SingStar Vol.", "SingStar Vol ", StringComparison.OrdinalIgnoreCase)
+            .Replace("PROTOTYPE2", "PROTOTYPE 2", StringComparison.OrdinalIgnoreCase)
+            .Replace("L@ve", "Love", StringComparison.OrdinalIgnoreCase)
+            .Replace("BAЛЛ•И", "ВАЛЛИ", StringComparison.OrdinalIgnoreCase)
             .Trim(), // extra whitespaces
         StringComparer.OrdinalIgnoreCase
     ).ThenBy(kvp => kvp.Key))
