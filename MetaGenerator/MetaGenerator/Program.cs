@@ -47,7 +47,7 @@ string ReplaceDisplayedTitle(string productCode, string title)
 {
     if (productTitleMapping.ContainsKey(productCode))
     {
-        return string.Join(" ", productTitleMapping[productCode]);
+        return productTitleMapping[productCode];
     }
     return title;
 }
