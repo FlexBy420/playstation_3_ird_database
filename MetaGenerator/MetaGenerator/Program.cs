@@ -107,37 +107,37 @@ await using var output = File.Open("./pages/all.json", new FileStreamOptions
 await using var writer = new Utf8JsonWriter(output, jsonWriterOptions);
 writer.WriteStartObject();
 foreach (var (productCode, irdInfoList) in result
-             .OrderBy(kvp => kvp.Value.Values.First().Title, StringComparer.OrdinalIgnoreCase)
-             .ThenBy(kvp => kvp.Key, StringComparer.OrdinalIgnoreCase))
-             .OrderBy(
-                 kvp => kvp.Value.Values.First().Title
-                 .Replace("[", "") // [PROTOTYPE2]
-                 .Replace("]", "")
-                 .Replace("(tm)", "", StringComparison.OrdinalIgnoreCase)
-                 .Replace("(r)", "", StringComparison.OrdinalIgnoreCase)
-                 .Replace(" ™", "")
-                 .Replace("™", "")
-                 .Replace(" ®", "")
-                 .Replace("®", "")
-                 .ReplaceFullWidth()
-                 .ReplaceKana()
-                 .Replace('\u2160', 'I')
-                 .Replace("\u2161", "II")
-                 .Replace("\u2162", "III")
-                 .Replace("\u2163", "IV")
-                 .Replace('\u2164', 'V')
-                 .Replace('\u3000', ' ')
-                 .Replace("\r\n", " ")
-                 .Replace('\r', ' ')
-                 .Replace('\n', ' ')
-                 .Replace("    ", " ")
-                 .Replace("   ", " ")
-                 .Replace("  ", " ")
-                 .Replace('·', '・') // greek middle dot???
-                 .Replace('･', '・') // half-width
-                 .Trim(), // extra whitespaces
-                 StringComparer.OrdinalIgnoreCase
-             ).ThenBy(kvp => kvp.Key))
+    .OrderBy(kvp => kvp.Value.Values.First().Title, StringComparer.OrdinalIgnoreCase)
+    .ThenBy(kvp => kvp.Key, StringComparer.OrdinalIgnoreCase)
+    .OrderBy(
+        kvp => kvp.Value.Values.First().Title
+        .Replace("[", "") // [PROTOTYPE2]
+        .Replace("]", "")
+        .Replace("(tm)", "", StringComparison.OrdinalIgnoreCase)
+        .Replace("(r)", "", StringComparison.OrdinalIgnoreCase)
+        .Replace(" ™", "")
+        .Replace("™", "")
+        .Replace(" ®", "")
+        .Replace("®", "")
+        .ReplaceFullWidth()
+        .ReplaceKana()
+        .Replace('\u2160', 'I')
+        .Replace("\u2161", "II")
+        .Replace("\u2162", "III")
+        .Replace("\u2163", "IV")
+        .Replace('\u2164', 'V')
+        .Replace('\u3000', ' ')
+        .Replace("\r\n", " ")
+        .Replace('\r', ' ')
+        .Replace('\n', ' ')
+        .Replace("    ", " ")
+        .Replace("   ", " ")
+        .Replace("  ", " ")
+        .Replace('·', '・') // greek middle dot???
+        .Replace('･', '・') // half-width
+        .Trim(), // extra whitespaces
+        StringComparer.OrdinalIgnoreCase
+    ).ThenBy(kvp => kvp.Key))
 {
     writer.WriteStartArray(productCode);
     foreach (var (crc, irdInfo) in irdInfoList
