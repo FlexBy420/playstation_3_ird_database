@@ -124,6 +124,9 @@ foreach (var (productCode, irdInfoList) in result
                  .Replace("Modern Warfare 2", "Call of Duty: Modern Warfare 2", StringComparison.OrdinalIgnoreCase)
                  .Replace("MotoGP08", "MotoGP 08", StringComparison.OrdinalIgnoreCase)
                  .Replace("Yoostar2", "Yoostar 2", StringComparison.OrdinalIgnoreCase)
+                 .Replace("RuneFactoryOceans", "Rune Factory Oceans", StringComparison.OrdinalIgnoreCase)
+                 .Replace("Persona4", "Persona 4", StringComparison.OrdinalIgnoreCase)
+                 .Replace("NBA2K7", "NBA 2K7", StringComparison.OrdinalIgnoreCase)
                  .Trim(), // extra whitespaces
                  StringComparer.OrdinalIgnoreCase
              ).ThenBy(kvp => kvp.Key))
