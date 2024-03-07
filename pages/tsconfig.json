@@ -8,6 +8,7 @@
         "strictFunctionTypes": true,
         "sourceMap": true,
         "allowUmdGlobalAccess": true,
+        "removeComments": true,
         "outFile": "app.js"
     },
     "watchOptions": {

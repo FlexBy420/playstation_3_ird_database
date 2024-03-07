@@ -5,6 +5,13 @@ const branch = '{{github.branch_name}}';
 const commit = '{{github.sha}}';
 const downloadUrlBase = `{{github.repo_web_url}}/raw/${branch}/`;
 
+// TypeScript type definition for compiler
+declare namespace bootstrap {
+    class Tooltip {
+        constructor(el: Element);
+    }
+}
+
 let initialized = false;
 let irdCount = 0;
 
@@ -16,6 +23,64 @@ function SetupTheme() {
     const setTheme = () => document.documentElement.setAttribute('data-bs-theme', window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
     setTheme();
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setTheme);
+}
+
+function EnableTooltips() {
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+}
+
+function CleanTitle(title: string): string {
+    let charr = title.split("").map(c => c.charCodeAt(0));
+    const arrLen = charr.length;
+    for (let i=0; i<arrLen; i++) {
+        const ch = charr[i];
+        if (ch > 0xff00 && ch <= 0xff5e) {
+            // replace full-width characters from ! to ~
+            charr[i] = ch - 0xfee0; // ch - 0xff00 + 0x0020
+        } else if (ch > 0x30a0 && ch <= 0x30f6) {
+            // replace katakana with hiragana (helps with filter during input)
+            charr[i] = ch - 0x0060; // ch - 0x30a0 + 0x3040
+        }
+    }
+    return charr.map(c => String.fromCharCode(c)).join("")
+        .toLowerCase()
+        // [prototype2]
+        .replaceAll('[', '')
+        .replaceAll(']', '')
+        // marks
+        .replaceAll('(tm)', '')
+        .replaceAll(' ™', '')
+        .replaceAll('™', '')
+        .replaceAll('(r)', '')
+        .replaceAll(' ®', '')
+        .replaceAll('®', '')
+        // whitespaces and punctuation
+        .replaceAll('\u3000', ' ')
+        .replaceAll('\r\n', ' ')
+        .replaceAll('\r', ' ')
+        .replaceAll('\n', ' ')
+        .replaceAll('    ', ' ')
+        .replaceAll('   ', ' ')
+        .replaceAll('  ', ' ')
+        .replaceAll('\u00B7', '・')
+        .replaceAll('\uFF65', '・')
+        // roman numbers
+        .replaceAll('\u2160', 'I')
+        .replaceAll('\u2161', 'II')
+        .replaceAll('\u2162', 'III')
+        .replaceAll('\u2163', 'IV')
+        .replaceAll('\u2164', 'V')
+        .replaceAll('\u2165', 'VI')
+        // titles
+        .replaceAll('core4', 'core4')
+        .replaceAll('baлл•и', 'валли')
+        .replaceAll('disgaea3', 'disgaea 3')
+        .replaceAll('disgaea4', 'disgaea 4')
+        .replaceAll('l@ve', 'love')
+        .replaceAll('prototype2', 'prototype 2')
+        .replaceAll('singstar vol.', 'singstar vol ')
+        .replaceAll('skate.', 'skate 1');
 }
 
 let filterTimeout: number|null = null;
@@ -34,7 +99,7 @@ function Filter() {
             clearButton.classList.remove('d-none');
             let filtered = 0;
             for(const row of tbody.rows) {
-                if (Array.from(row.cells).some(v => v.getAttribute('filter-value')?.includes(val))) {
+                if (Array.from(row.cells).some(v => v.getAttribute('filter-value')?.includes(val) || v.textContent?.includes(val))) {
                     row.classList.remove('d-none');
                     filtered++;
                 } else {
@@ -97,7 +162,7 @@ async function LoadData() {
                 codeCell.setAttribute('filter-value', code.toLowerCase());
                 const titleCell = row.insertCell();
                 titleCell.textContent = irdInfo.title;
-                titleCell.setAttribute('filter-value', irdInfo.title.toLowerCase());
+                titleCell.setAttribute('filter-value', CleanTitle(irdInfo.title));
                 row.insertCell().textContent = irdInfo['app-ver'];
                 row.insertCell().textContent = irdInfo['game-ver'];
                 row.insertCell().textContent = irdInfo['fw-ver'];
@@ -136,6 +201,7 @@ async function Init() {
         const ver = document.getElementById('version') as HTMLSpanElement;
         ver.textContent = `${branch} // ${commit}`;
         SetupTheme();
+        EnableTooltips();
         await LoadData();
     }
 }

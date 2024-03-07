@@ -67,6 +67,9 @@
 									<li><a class="dropdown-item" href="https://archive.org/details/IsoToolsV1.34.9.7z" target="_blank" rel="external noopener">
 										<i class="bi bi-box-arrow-up-right" role="img" aria-label="External"></i>
 										3k3y-iso-tools</a></li>
+									<li><a class="dropdown-item" href="https://github.com/Deterous/LibIRD" target="_blank" rel="external noopener">
+										<i class="bi bi-box-arrow-up-right" role="img" aria-label="External"></i>
+										LibIRD</a></li>
 								</ul>
 							</li>
 							<li class="nav-item"><a class="nav-link" href="https://github.com/FlexBy420/playstation_3_ird_database" target="_blank" rel="external noopener">
@@ -97,11 +100,11 @@
 				<table class="table table-hover" id="table">
 				<thead>
 					<tr>
-						<th>Product Code</th>
+						<th data-bs-toggle="tooltip" data-bs-title="Product code printed on the disc">Product Code <i class="bi bi-info-circle"></i></th>
 						<th>Title</th>
-						<th>App Version</th>
-						<th>Game Version</th>
-						<th>Firmware Version</th>
+						<th data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="Game version as seen in XMB (<code>APP_VER</code>)">App Version <i class="bi bi-info-circle"></i></th>
+						<th data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="Disc print version (<code>VERSION</code>) of this specific game version (<code>APP_VER</code>)">Game Version <i class="bi bi-info-circle"></i></th>
+						<th data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="Minimum firmware version required (<code>PS3_SYSTEM_VER</code>), and provided on the disc for offline update">Firmware Version <i class="bi bi-info-circle"></i></th>
 						<th>IRD</th>
 					</tr>
 				</thead>

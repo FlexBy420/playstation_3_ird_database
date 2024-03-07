@@ -1,4 +1,4 @@
-﻿using System.Collections.Concurrent;
+using System.Collections.Concurrent;
 using System.Text.Encodings.Web;
 using MetaGenerator;
 using MetaGenerator.IrdFormat;
