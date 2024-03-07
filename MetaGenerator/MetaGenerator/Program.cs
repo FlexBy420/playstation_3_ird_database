@@ -25,7 +25,7 @@ var fileStreamOptions = new FileStreamOptions
     Access = FileAccess.Read,
     Share = FileShare.Read,
     Options = FileOptions.Asynchronous | FileOptions.SequentialScan,
-    BufferSize = 16*1024,
+    BufferSize = 16 * 1024,
 };
 #if DEBUG && !DEBUG
 var maxParallel = 1;
@@ -44,7 +44,7 @@ string[] ReplaceDisplayedTitle(string productCode, string title)
 
 var result = new ConcurrentDictionary<string, ConcurrentDictionary<uint, IrdInfo>>();
 await Parallel.ForEachAsync(irdFileList,
-    new ParallelOptions{MaxDegreeOfParallelism = maxParallel},
+    new ParallelOptions { MaxDegreeOfParallelism = maxParallel },
     async (irdFilePath, ct) =>
     {
         await using var file = File.Open(irdFilePath, fileStreamOptions);
@@ -80,7 +80,7 @@ var jsonWriterOptions = new JsonWriterOptions
     Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
 #if DEBUG
     Indented = true,
-#else    
+#else
     Indented = false,
 #endif
 };
@@ -91,7 +91,7 @@ await using var output = File.Open("./pages/all.json", new FileStreamOptions
     Access = FileAccess.Write,
     Share = FileShare.Read,
     Options = FileOptions.Asynchronous | FileOptions.SequentialScan,
-    PreallocationSize = 2*1024*1024,
+    PreallocationSize = 2 * 1024 * 1024,
 });
 await using var writer = new Utf8JsonWriter(output, jsonWriterOptions);
 writer.WriteStartObject();
@@ -134,7 +134,7 @@ foreach (var (productCode, irdInfoList) in result
         .ThenBy(ii => ii.Value.AppVer))
     {
         writer.WriteStartObject();
-        writer.WriteString("title", irdInfo.Title);
+        writer.WriteString("title", string.Join(", ", irdInfo.Title));
         if (irdInfo.FwVer is { Length: > 0 } fwVer and not "\0\0\0\0")
             writer.WriteString("fw-ver", fwVer);
         if (irdInfo.GameVer is { Length: > 0 } gameVer and not "\0\0\0\0\0")
