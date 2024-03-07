@@ -111,7 +111,7 @@ public static class ProductTitleMapping
         { "BCJS30067", "フレ！フレ！ボウリング" },
         { "BCJS30093", "Rain" },
         { "BCJX96003", "プレイステーション３　スペシャルデモディスク" },
-        { "BCJX96005", "もっと　あそ棒。 ＰｌａｙＳｔａｔｉｏｎ Ｍｏｖｅ 体験ディスク" },
+        { "BCJX96005", "もっと　あそ棒。 PlayStation Move 体験ディスク" },
         { "BCJX96008", "ラチェット＆クランク　オールフォーワン" },
         { "BCUS98261", "High Velocity Bowling" },
         { "BCUS98263", "PlayStation Move Game Demo Disc" },
@@ -126,15 +126,15 @@ public static class ProductTitleMapping
         { "BLJM60433", "バイオハザード　クロニクルズ　ＨＤセレクション" },
         { "BLJM60467", "大神　絶景版" },
         { "BLJM60510", "ファイナルファンタジーⅩⅢ－２　追加コンテンツセレクション" },
-        { "BLJM60577", "モンスターハンター　フロンティア　Ｇ" },
-        { "BLJM61238", "絶対迎撃ウォーズ　Ｍｅｔｒｏｐｏｌｉｓ　Ｄｅｆｅｎｄｅｒｓ" },
-        { "BLJM61282", "ファイナルファンタジーⅩⅣ　ＯＮＬＩＮＥ" },
+        { "BLJM60577", "モンスターハンター　フロンティア　G" },
+        { "BLJM61238", "絶対迎撃ウォーズ　Metropolis Defenders" },
+        { "BLJM61282", "ファイナルファンタジーⅩⅣ　Online" },
         { "BLJM61283", "ファイナルファンタジーⅩⅣ　オンライン： 蒼天のイシュガルド" },
-        { "BLJM85001", "モンスター・ハンター・ポータブル　３ｒｄ　ＨＤ　Ｖｅｒ." }, // psp remasters
+        { "BLJM85001", "モンスター・ハンター・ポータブル　3rd HD Ver." }, // psp remasters
         { "BLJM85002", "けいおん！ 放課後ライブ！！ HD Ver." },
-        { "BLJM85004", "英雄伝説　空の軌跡FC：改　ＨＤ　Ｅｄｉｔｉｏｎ" },
-        { "BLJM85005", "英雄伝説 空の軌跡SC：改 HD EDITION" },
-        { "BLJM85006", "英雄伝説　空の軌跡ｔｈｅ　３ｒｄ：改　ＨＤ　Ｅｄｉｔｉｏｎ" }, // end psp remasters
+        { "BLJM85004", "英雄伝説　空の軌跡FC:改　HD Edition" },
+        { "BLJM85005", "英雄伝説 空の軌跡SC:改 HD EDITION" },
+        { "BLJM85006", "英雄伝説　空の軌跡ｔｈｅ　３ｒｄ：改　HD Edition" }, // end psp remasters
         { "BLJS10123", "エンジェル戦記" },
         { "BLJS10124", "エンジェルラブオンライン" },
         { "BLJS10222", "テラリア" },
