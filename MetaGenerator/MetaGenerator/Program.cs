@@ -33,13 +33,13 @@ var maxParallel = 1;
 var maxParallel = Environment.ProcessorCount;
 #endif
 
-string[] ReplaceDisplayedTitle(string productCode, string title)
+string ReplaceDisplayedTitle(string productCode, string title)
 {
     if (ProductTitleMapping.Mapping.ContainsKey(productCode))
     {
-        return ProductTitleMapping.Mapping[productCode].Split(", ");
+        return ProductTitleMapping.Mapping[productCode];
     }
-    return new string[] { title };
+    return title;
 }
 
 var result = new ConcurrentDictionary<string, ConcurrentDictionary<uint, IrdInfo>>();
