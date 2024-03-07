@@ -29,12 +29,20 @@ var maxParallel = 1;
 var maxParallel = Environment.ProcessorCount;
 #endif
 
-var productTitleMapping = new Dictionary<string, string>
+var productTitleMapping = new Dictionary<string, List<string>>
 {
-    { "BCAS20136", "3D Collection" },
-    { "BCJX96004", "PlayStation 3 Special Demo Disc" },
-    { "BCJX96010", "Puppeteer Demo" },
+    { "Assassin's Creed: Brotherhood", new List<string> { "BLES00909", "BLES00910", "BLES00911", "BLJM60250", "BLUS30537" } },
+    { "Assassin's Creed: Revelations", new List<string> { "BLES01384", "BLES01385", "BLES01466", "BLES01467", "BLJM60412", "BLJM60573", "BLJM67011", "BLUS30808", "BLUS30905", "BLUS31145" } },
+    { "ARMORED CORE 4", new List<string> { "BLES00039", "BLJM60012" } },
+    { "3D Collection", new List<string> { "BCAS20136" } },
+    { "Puppeteer Demo", new List<string> { "BCJX96010" } },
+    { "PlayStation 3 Special Demo Disc", new List<string> { "BCJX96004" } },
+    { "PlayStation 3 Big Hit Titles' Demo Collection Vol. 2", new List<string> { "BCAS20127" } },
+    { "PlayStation 3 Big Hit Titles' Demo Collection Vol. 3", new List<string> { "BCAS20158" } },
+    { "All About PlayStation Game Hits Vol. 1", new List<string> { "BCAS20226" } },
+    { "Demo & Trailer Collection for Asia", new List<string> { "BCAX90001" } },
 };
+
 
 string ReplaceDisplayedTitle(string productCode, string title)
 {
@@ -101,6 +109,35 @@ writer.WriteStartObject();
 foreach (var (productCode, irdInfoList) in result
              .OrderBy(kvp => kvp.Value.Values.First().Title, StringComparer.OrdinalIgnoreCase)
              .ThenBy(kvp => kvp.Key, StringComparer.OrdinalIgnoreCase))
+             .OrderBy(
+                 kvp => kvp.Value.Values.First().Title
+                 .Replace("[", "") // [PROTOTYPE2]
+                 .Replace("]", "")
+                 .Replace("(tm)", "", StringComparison.OrdinalIgnoreCase)
+                 .Replace("(r)", "", StringComparison.OrdinalIgnoreCase)
+                 .Replace(" ™", "")
+                 .Replace("™", "")
+                 .Replace(" ®", "")
+                 .Replace("®", "")
+                 .ReplaceFullWidth()
+                 .ReplaceKana()
+                 .Replace('\u2160', 'I')
+                 .Replace("\u2161", "II")
+                 .Replace("\u2162", "III")
+                 .Replace("\u2163", "IV")
+                 .Replace('\u2164', 'V')
+                 .Replace('\u3000', ' ')
+                 .Replace("\r\n", " ")
+                 .Replace('\r', ' ')
+                 .Replace('\n', ' ')
+                 .Replace("    ", " ")
+                 .Replace("   ", " ")
+                 .Replace("  ", " ")
+                 .Replace('·', '・') // greek middle dot???
+                 .Replace('･', '・') // half-width
+                 .Trim(), // extra whitespaces
+                 StringComparer.OrdinalIgnoreCase
+             ).ThenBy(kvp => kvp.Key))
 {
     writer.WriteStartArray(productCode);
     foreach (var (crc, irdInfo) in irdInfoList
