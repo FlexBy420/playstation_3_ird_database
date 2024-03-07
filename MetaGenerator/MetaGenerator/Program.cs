@@ -29,6 +29,22 @@ var maxParallel = 1;
 var maxParallel = Environment.ProcessorCount;
 #endif
 
+var productTitleMapping = new Dictionary<string, string>
+{
+    { "BCAS20136", "3D Collection" },
+    { "BCJX96004", "PlayStation 3 Special Demo Disc" },
+    { "BCJX96010", "Puppeteer Demo" },
+};
+
+string ReplaceDisplayedTitle(string productCode, string title)
+{
+    if (productTitleMapping.ContainsKey(productCode))
+    {
+        return productTitleMapping[productCode];
+    }
+    return title;
+}
+
 var result = new ConcurrentDictionary<string, ConcurrentDictionary<uint, IrdInfo>>();
 await Parallel.ForEachAsync(irdFileList,
     new ParallelOptions{MaxDegreeOfParallelism = maxParallel},
@@ -42,8 +58,16 @@ await Parallel.ForEachAsync(irdFileList,
             var ird = IrdParser.Parse(memStream.GetBuffer());
             var relPath = Path.GetRelativePath(".", irdFilePath);
             relPath = relPath.Replace('\\', '/');
-            var irdInfo = new IrdInfo(ird.Title, ird.UpdateVersion, ird.GameVersion, ird.AppVersion, relPath); 
-            var irdList = result.GetOrAdd(ird.ProductCode, _ => []);
+
+            var irdInfo = new IrdInfo(
+                ReplaceDisplayedTitle(ird.ProductCode, ird.Title),
+                ird.UpdateVersion,
+                ird.GameVersion,
+                ird.AppVersion,
+                relPath
+            );
+
+            var irdList = result.GetOrAdd(ird.ProductCode, _ => new ConcurrentDictionary<uint, IrdInfo>());
             if (!irdList.TryAdd(ird.Crc32, irdInfo))
                 Log.Debug($"Skipped duplicate {irdFilePath}");
         }
@@ -57,12 +81,12 @@ await Parallel.ForEachAsync(irdFileList,
 var jsonWriterOptions = new JsonWriterOptions
 {
     Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
-#if DEBUG    
+#if DEBUG
     Indented = true,
 #else    
     Indented = false,
 #endif
-}; 
+};
 
 await using var output = File.Open("./pages/all.json", new FileStreamOptions
 {
@@ -75,8 +99,8 @@ await using var output = File.Open("./pages/all.json", new FileStreamOptions
 await using var writer = new Utf8JsonWriter(output, jsonWriterOptions);
 writer.WriteStartObject();
 foreach (var (productCode, irdInfoList) in result
-             .OrderBy(kvp => kvp.Value.Values.First().Title.TrimStart('['))
-             .ThenBy(kvp => kvp.Key))
+             .OrderBy(kvp => kvp.Value.Values.First().Title, StringComparer.OrdinalIgnoreCase)
+             .ThenBy(kvp => kvp.Key, StringComparer.OrdinalIgnoreCase))
 {
     writer.WriteStartArray(productCode);
     foreach (var (crc, irdInfo) in irdInfoList
