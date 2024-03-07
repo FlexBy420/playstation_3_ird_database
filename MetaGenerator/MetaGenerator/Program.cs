@@ -1,4 +1,4 @@
-﻿using System.Collections.Concurrent;
+using System.Collections.Concurrent;
 using System.Text.Encodings.Web;
 using MetaGenerator;
 using MetaGenerator.IrdFormat;
@@ -29,6 +29,22 @@ var maxParallel = 1;
 var maxParallel = Environment.ProcessorCount;
 #endif
 
+var productTitleMapping = new Dictionary<string, string>
+{
+    { "BCAS20136", "3D Collection" },
+    { "BCJX96004", "PlayStation 3 Special Demo Disc" },
+    { "BCJX96010", "Puppeteer Demo" },
+};
+
+string ReplaceDisplayedTitle(string productCode, string title)
+{
+    if (productTitleMapping.ContainsKey(productCode))
+    {
+        return productTitleMapping[productCode];
+    }
+    return title;
+}
+
 var result = new ConcurrentDictionary<string, ConcurrentDictionary<uint, IrdInfo>>();
 await Parallel.ForEachAsync(irdFileList,
     new ParallelOptions{MaxDegreeOfParallelism = maxParallel},
@@ -42,8 +58,16 @@ await Parallel.ForEachAsync(irdFileList,
             var ird = IrdParser.Parse(memStream.GetBuffer());
             var relPath = Path.GetRelativePath(".", irdFilePath);
             relPath = relPath.Replace('\\', '/');
-            var irdInfo = new IrdInfo(ird.Title, ird.UpdateVersion, ird.GameVersion, ird.AppVersion, relPath); 
-            var irdList = result.GetOrAdd(ird.ProductCode, _ => []);
+
+            var irdInfo = new IrdInfo(
+                ReplaceDisplayedTitle(ird.ProductCode, ird.Title),
+                ird.UpdateVersion,
+                ird.GameVersion,
+                ird.AppVersion,
+                relPath
+            );
+
+            var irdList = result.GetOrAdd(ird.ProductCode, _ => new ConcurrentDictionary<uint, IrdInfo>());
             if (!irdList.TryAdd(ird.Crc32, irdInfo))
                 Log.Debug($"Skipped duplicate {irdFilePath}");
         }
@@ -57,12 +81,12 @@ await Parallel.ForEachAsync(irdFileList,
 var jsonWriterOptions = new JsonWriterOptions
 {
     Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
-#if DEBUG    
+#if DEBUG
     Indented = true,
 #else    
     Indented = false,
 #endif
-}; 
+};
 
 await using var output = File.Open("./pages/all.json", new FileStreamOptions
 {
@@ -75,61 +99,8 @@ await using var output = File.Open("./pages/all.json", new FileStreamOptions
 await using var writer = new Utf8JsonWriter(output, jsonWriterOptions);
 writer.WriteStartObject();
 foreach (var (productCode, irdInfoList) in result
-             .OrderBy(
-                 kvp => kvp.Value.Values.First().Title
-                 .Replace("[", "") // [PROTOTYPE2]
-                 .Replace("]", "")
-                 .Replace("(tm)", "", StringComparison.OrdinalIgnoreCase)
-                 .Replace("(r)", "", StringComparison.OrdinalIgnoreCase)
-                 .Replace(" ™", "")
-                 .Replace("™", "")
-                 .Replace(" ®", "")
-                 .Replace("®", "")
-                 .ReplaceFullWidth()
-                 .ReplaceKana()
-                 .Replace('\u2160', 'I')
-                 .Replace("\u2161", "II")
-                 .Replace("\u2162", "III")
-                 .Replace("\u2163", "IV")
-                 .Replace('\u2164', 'V')
-                 .Replace('\u3000', ' ')
-                 .Replace("\r\n", " ")
-                 .Replace('\r', ' ')
-                 .Replace('\n', ' ')
-                 .Replace("    ", " ")
-                 .Replace("   ", " ")
-                 .Replace("  ", " ")
-                 .Replace('·', '・') // greek middle dot???
-                 .Replace('･', '・') // half-width
-                 .Replace("CORE4", "CORE 4", StringComparison.OrdinalIgnoreCase) // game-specific 
-                 .Replace("BAЛЛ•И", "ВАЛЛИ", StringComparison.OrdinalIgnoreCase) 
-                 .Replace("Disgaea3", "Disgaea 3", StringComparison.OrdinalIgnoreCase) 
-                 .Replace("Disgaea4", "Disgaea 4", StringComparison.OrdinalIgnoreCase) 
-                 .Replace("L@ve", "Love", StringComparison.OrdinalIgnoreCase) 
-                 .Replace("PROTOTYPE2", "PROTOTYPE 2", StringComparison.OrdinalIgnoreCase) 
-                 .Replace("SingStar Vol.", "SingStar Vol ", StringComparison.OrdinalIgnoreCase) 
-                 .Replace("skate.", "skate 1", StringComparison.OrdinalIgnoreCase) 
-                 .Replace("skate2", "skate 2", StringComparison.OrdinalIgnoreCase)
-                 .Replace("Spirits4", "Spirits 4", StringComparison.OrdinalIgnoreCase)
-                 .Replace("FIFA09", "FIFA 09", StringComparison.OrdinalIgnoreCase)
-                 .Replace("GranTurismo", "GRAN TURISMO 5 Prologue", StringComparison.OrdinalIgnoreCase) // BCKS10030
-                 .Replace("GTA San Andreas", "Grand Theft Auto: San Andreas", StringComparison.OrdinalIgnoreCase)
-                 .Replace("HEAVY FIRE SHATTERED SPEAR", "Heavy Fire: Shattered Spear", StringComparison.OrdinalIgnoreCase)
-                 .Replace("HEAVY FIRE AFGHANISTAN", "Heavy Fire: Afghanistan", StringComparison.OrdinalIgnoreCase)
-                 .Replace("Hyperdimention Neptune mk2", "Hyperdimension Neptunia mk2", StringComparison.OrdinalIgnoreCase) // BLKS20353
-                 .Replace("Hyperdimension Neptune mk2", "Hyperdimension Neptunia mk2", StringComparison.OrdinalIgnoreCase) // BLJM60992
-                 .Replace("Hyperdimension Neptune", "Hyperdimension Neptunia", StringComparison.OrdinalIgnoreCase)
-                 .Replace("NeptuneV", "Neptune V", StringComparison.OrdinalIgnoreCase)
-                 .Replace("InitialD EXTREME STAGE", "INITIAL D EXTREME STAGE", StringComparison.OrdinalIgnoreCase) // BLJM60055
-                 .Replace("Modern Warfare 2", "Call of Duty: Modern Warfare 2", StringComparison.OrdinalIgnoreCase)
-                 .Replace("MotoGP08", "MotoGP 08", StringComparison.OrdinalIgnoreCase)
-                 .Replace("Yoostar2", "Yoostar 2", StringComparison.OrdinalIgnoreCase)
-                 .Replace("RuneFactoryOceans", "Rune Factory Oceans", StringComparison.OrdinalIgnoreCase)
-                 .Replace("Persona4", "Persona 4", StringComparison.OrdinalIgnoreCase)
-                 .Replace("NBA2K7", "NBA 2K7", StringComparison.OrdinalIgnoreCase)
-                 .Trim(), // extra whitespaces
-                 StringComparer.OrdinalIgnoreCase
-             ).ThenBy(kvp => kvp.Key))
+             .OrderBy(kvp => kvp.Value.Values.First().Title, StringComparer.OrdinalIgnoreCase)
+             .ThenBy(kvp => kvp.Key, StringComparer.OrdinalIgnoreCase))
 {
     writer.WriteStartArray(productCode);
     foreach (var (crc, irdInfo) in irdInfoList
