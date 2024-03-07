@@ -4,6 +4,7 @@ using MetaGenerator;
 using MetaGenerator.IrdFormat;
 using Microsoft.IO;
 using System.Text.Json;
+using ProductTitleMapping;
 
 var baseDir = ".";
 var baseDownloadUrl = "https://github.com/13xforever/ird-db/raw/main/";
@@ -29,30 +30,7 @@ var maxParallel = 1;
 var maxParallel = Environment.ProcessorCount;
 #endif
 
-var productTitleMapping = new Dictionary<string, string>
-{
-    { "BCAS20136", "3D Collection" },
-    { "BCJX96004", "PlayStation 3 Special Demo Disc" },
-    { "BCJX96010", "Puppeteer Demo" },
-    { "BLES00909", "Assassin's Creed: Brotherhood" },
-    { "BLES00910", "Assassin's Creed: Brotherhood" },
-    { "BLES00911", "Assassin's Creed: Brotherhood" },
-    { "BLJM60250", "Assassin's Creed: Brotherhood" },
-    { "BLUS30537", "Assassin's Creed: Brotherhood" },
-    { "BLES01384", "Assassin's Creed: Revelations" },
-    { "BLES01385", "Assassin's Creed: Revelations" },
-    { "BLES01466", "Assassin's Creed: Revelations" },
-    { "BLES01467", "Assassin's Creed: Revelations" },
-    { "BLJM60412", "Assassin's Creed: Revelations" },
-    { "BLJM60573", "Assassin's Creed: Revelations" },
-    { "BLJM67011", "Assassin's Creed: Revelations" },
-    { "BLUS30808", "Assassin's Creed: Revelations" },
-    { "BLUS30905", "Assassin's Creed: Revelations" },
-    { "BLUS31145", "Assassin's Creed: Revelations" },
-    { "BLES00039", "ARMORED CORE 4" },
-    { "BLJM60012", "ARMORED CORE 4" },
-};
-
+var productTitleMapping = ProductTitleMapping.Mapping;
 string ReplaceDisplayedTitle(string productCode, string title)
 {
     if (productTitleMapping.ContainsKey(productCode))
