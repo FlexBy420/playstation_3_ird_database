@@ -225,5 +225,10 @@ public static class ProductTitleMapping
         { "BLJM60018", "Gundam Musou" },
         { "BLES00146", "The Simpsons Game" },
         { "BLES01245", "Cars 2" },
+        { "BLES01924", "Dishonored: Game of the Year Edition" },
+        { "BLES01925", "Dishonored: Game of the Year Edition" },
+        { "BLES01926", "Dishonored: Game of the Year Edition" },
+        { "BLJM61114", "Dishonored: Game of the Year Edition" },
+        { "BLUS41038", "Dishonored: Game of the Year Edition" },
     };
 }
