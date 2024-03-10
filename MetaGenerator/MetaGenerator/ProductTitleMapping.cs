@@ -149,6 +149,7 @@ public static class ProductTitleMapping
         { "BLUS41046", "Borderlands 2: Game of the Year Edition (Add-On Disc)" }, 
         { "BLJM61008", "ウィザードリィ　パーフェクトパック" },
         { "BLJM60312", "ウィザードリィ　ツインパック" },
+        { "BLJS10280", "デッドアイランド　ダブルゾンビパック" },
         // title fixes
         { "BLES00039", "ARMORED CORE 4" },
         { "BLJM60012", "ARMORED CORE 4" },
@@ -243,5 +244,6 @@ public static class ProductTitleMapping
         { "BLJM61114", "Dishonored: Game of the Year Edition" },
         { "BLUS41038", "Dishonored: Game of the Year Edition" },
         { "BCAS20023", "Ratchet and Clank Future: Tools of Destruction" },
+        { "BLJS10106", "Rune Factory Oceans" },
     };
 }
