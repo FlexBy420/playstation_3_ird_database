@@ -75,7 +75,7 @@ public static class ProductTitleMapping
         { "BCED01207", "Official PlayStation Magazine Issue 65: Christmas 2011" },
         { "BCED01208", "Official PlayStation Magazine Issue 66: January 2012" },
         { "BCED01209", "Official PlayStation Magazine Issue 67: February 2012" },
-        { "BCED01539", "Ratchet & Clank: All 4 One Demo" }, // a demo that comes bundled with zookeeper movie lol, related ids BCED01452, BCED01513, BCED01539, BCUS70170
+        { "BCED01539", "Ratchet & Clank: All 4 One Demo" }, // a demo that comes bundled with zookeeper movie lol, related ids BCED01452, BCED01513, BCUS70170
         { "BCED01564", "Official PlayStation Magazine Issue 69: April 2012" }, // :)
         { "BCED01565", "Official PlayStation Magazine Issue 70: May 2012" },
         { "BCED01566", "Official PlayStation Magazine Issue 71: June 2012" },
@@ -244,6 +244,7 @@ public static class ProductTitleMapping
         { "BLJM61114", "Dishonored: Game of the Year Edition" },
         { "BLUS41038", "Dishonored: Game of the Year Edition" },
         { "BCAS20023", "Ratchet and Clank Future: Tools of Destruction" },
+        { "BCJS30014", "Ratchet and Clank Future: Tools of Destruction" },
         { "BLJS10106", "Rune Factory Oceans" },
     };
 }
