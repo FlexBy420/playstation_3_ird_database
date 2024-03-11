@@ -150,6 +150,7 @@ public static class ProductTitleMapping
         { "BLJM61008", "ウィザードリィ　パーフェクトパック" },
         { "BLJM60312", "ウィザードリィ　ツインパック" },
         { "BLJS10280", "デッドアイランド　ダブルゾンビパック" },
+        { "BCUS98274", "This Is the Next Level: 3D Games and Demo Disc" },
         // title fixes
         { "BLES00039", "ARMORED CORE 4" },
         { "BLJM60012", "ARMORED CORE 4" },
