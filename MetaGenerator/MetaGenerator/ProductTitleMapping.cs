@@ -151,6 +151,9 @@ public static class ProductTitleMapping
         { "BLJM60312", "ウィザードリィ　ツインパック" },
         { "BLJS10280", "デッドアイランド　ダブルゾンビパック" },
         { "BCUS98274", "This Is the Next Level: 3D Games and Demo Disc" },
+        { "BLES02218", "Borderlands Triple Pack (Add-On Installation Disc)" },
+        { "BLES02028", "Syberia Collection" },
+        { "BLES01973", "Worms: The Revolution Collection" },
         // title fixes
         { "BLES00039", "ARMORED CORE 4" },
         { "BLJM60012", "ARMORED CORE 4" },
@@ -227,8 +230,8 @@ public static class ProductTitleMapping
         { "BLUS31202", "The Elder Scrolls V: Skyrim: Legendary Edition" },
         { "BLES00048", "The Elder Scrolls IV: Oblivion" },
         { "BLUS30007", "The Elder Scrolls IV: Oblivion" },
+        { "BLJM60032", "The Elder Scrolls IV: Oblivion" }, // original and goty?
         { "BLES00163", "The Elder Scrolls IV: Oblivion: Game of the Year Edition" },
-        { "BLJM60032", "The Elder Scrolls IV: Oblivion: Game of the Year Edition" }, // original and goty?
         { "BLUS30087", "The Elder Scrolls IV: Oblivion: Game of the Year Edition" },
         { "BLJS10034", "The Elder Scrolls IV: Oblivion: Game of the Year Edition" },
         { "BLUS30106", "The Elder Scrolls IV: Shivering Isles" },
@@ -247,5 +250,29 @@ public static class ProductTitleMapping
         { "BCAS20023", "Ratchet and Clank Future: Tools of Destruction" },
         { "BCJS30014", "Ratchet and Clank Future: Tools of Destruction" },
         { "BLJS10106", "Rune Factory Oceans" },
+        // multigame discs PS3_GMXX
+        { "BLES02226", "Saints Row: Game of the Century Edition & Gat out of Hell" }, // BLES02019, BLES02095
+        { "BLES02221", "Naruto Shippuden: Ultimate Ninja Storm Collection" }, // BLES00371, BLES00952, BLES01951
+        { "BLES02212", "Far Cry 3 + Far Cry 4: Double Pack" },
+        { "BLES02203", "Far Cry 3 + Far Cry 4: Double Pack" }, // BLES01137, BLES02011
+        { "BLUS82012", "Borderlands Triple Pack" },
+        { "BLES02211", "Assassin's Creed IV: Black Flag + Assassin's Creed: Rogue" },
+        { "BLES02204", "Assassin's Creed IV: Black Flag + Assassin's Creed: Rogue" }, // BLES01882, BLES02061
+        { "BLES02208", "Rayman Legends + Rayman Origins" }, // BLES01896, BLES01510
+        { "BLES02183", "Rayman Legends + Rayman Origins" }, // BLES01863, BLES01386
+        { "BLES02198", "The Disgaea Triple Play Collection" }, // BLES00452, BLES01225, BLES01939
+        { "BLES02156", "Tales of Symphonia Chronicles + Tales of Graces f" }, // BLES01617, BLES01864
+        { "BLES02137", "Hyperdimension Neptunia Hypercollection" }, // BLES01178, BLES01507, BLES01788
+        { "BLES02138", "The Arland Atelier Trilogy" }, // BLES01030, BLES01221, BLES01593
+        { "BLES02131", "One Piece: Pirate Warriors + One Piece: Pirate Warriors 2" }, // BLES01672, BLES01913
+        { "BLES02130", "Motorbike Racing Pack" }, // BLES01805, BLES01551, BLES01647
+        { "BLES02129", "Fighting Edition" }, // BLES01250, BLES00635, BLES01702
+        { "BLES02124", "Ultimate Stealth Triple Pack" }, // BLES01151, BLES01778, BLES01982
+        { "BLES02122", "Ultimate Stealth Triple Pack" }, // BLES01151, BLES01403, BLES01982
+        { "BLES02116", "Ultimate Stealth Triple Pack" }, // BLES01150, BLES01403, BLES01982
+        { "BLES02123", "Ultimate Action Triple Pack" }, // BLES00517, BLES01704, BLES01780
+        { "BLES02121", "Ultimate Action Triple Pack" }, // BLES00517, BLES01704, BLES01780
+        { "BLES02117", "Ultimate Action Triple Pack" }, // BLES00517, BLES01661, BLES01780
+        { "BLES02094", "Saints Row: Double Pack" }, // BLES01747, BLES02019
     };
 }
