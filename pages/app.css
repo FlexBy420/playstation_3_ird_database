@@ -7,3 +7,7 @@ input#filter {
     cursor: pointer;
     transform: translate(-15px, 15px);
 }
+
+.custom-width{
+    max-width: 1720px;
+}
