@@ -167,6 +167,7 @@ public static class ProductTitleMapping
         { "BLES01385", "Assassin's Creed: Revelations" },
         { "BLES01466", "Assassin's Creed: Revelations" },
         { "BLES01467", "Assassin's Creed: Revelations" },
+        { "BLES01772", "Assassin's Creed: Revelations" },
         { "BLJM60412", "Assassin's Creed: Revelations" },
         { "BLJM60573", "Assassin's Creed: Revelations" },
         { "BLJM67011", "Assassin's Creed: Revelations" },
@@ -256,23 +257,31 @@ public static class ProductTitleMapping
         { "BLES02212", "Far Cry 3 + Far Cry 4: Double Pack" },
         { "BLES02203", "Far Cry 3 + Far Cry 4: Double Pack" }, // BLES01137, BLES02011
         { "BLUS82012", "Borderlands Triple Pack" },
+        { "BLES82007", "Borderlands Triple Pack" }, // BLES00697, BLES01684, BLES02058
         { "BLES02211", "Assassin's Creed IV: Black Flag + Assassin's Creed: Rogue" },
         { "BLES02204", "Assassin's Creed IV: Black Flag + Assassin's Creed: Rogue" }, // BLES01882, BLES02061
         { "BLES02208", "Rayman Legends + Rayman Origins" }, // BLES01896, BLES01510
         { "BLES02183", "Rayman Legends + Rayman Origins" }, // BLES01863, BLES01386
         { "BLES02198", "The Disgaea Triple Play Collection" }, // BLES00452, BLES01225, BLES01939
+        { "BLUS31577", "The Disgaea Triple Play Collection" },
         { "BLES02156", "Tales of Symphonia Chronicles + Tales of Graces f" }, // BLES01617, BLES01864
         { "BLES02137", "Hyperdimension Neptunia Hypercollection" }, // BLES01178, BLES01507, BLES01788
         { "BLES02138", "The Arland Atelier Trilogy" }, // BLES01030, BLES01221, BLES01593
+        { "BLUS31581", "The Arland Atelier Trilogy" },
         { "BLES02131", "One Piece: Pirate Warriors + One Piece: Pirate Warriors 2" }, // BLES01672, BLES01913
         { "BLES02130", "Motorbike Racing Pack" }, // BLES01805, BLES01551, BLES01647
         { "BLES02129", "Fighting Edition" }, // BLES01250, BLES00635, BLES01702
         { "BLES02124", "Ultimate Stealth Triple Pack" }, // BLES01151, BLES01778, BLES01982
         { "BLES02122", "Ultimate Stealth Triple Pack" }, // BLES01151, BLES01403, BLES01982
         { "BLES02116", "Ultimate Stealth Triple Pack" }, // BLES01150, BLES01403, BLES01982
+        { "BLUS31552", "Ultimate Stealth Triple Pack" },
+        { "BLUS31551", "Ultimate Action Triple Pack" }, // BLUS30400, BLUS30927, BLUS31036
         { "BLES02123", "Ultimate Action Triple Pack" }, // BLES00517, BLES01704, BLES01780
         { "BLES02121", "Ultimate Action Triple Pack" }, // BLES00517, BLES01704, BLES01780
         { "BLES02117", "Ultimate Action Triple Pack" }, // BLES00517, BLES01661, BLES01780
         { "BLES02094", "Saints Row: Double Pack" }, // BLES01747, BLES02019
+        { "BLES01840", "Tom Clancy's Ghost Recon Double Pack" },
+        // prototypes
+        { "TEST01814", "Section 8 Prejudice 2010-07-08 Beta" },
     };
 }
