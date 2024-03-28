@@ -153,6 +153,7 @@ public static class ProductTitleMapping
         { "BCUS98274", "This Is the Next Level: 3D Games and Demo Disc" },
         { "BLES02218", "Borderlands Triple Pack (Add-On Installation Disc)" },
         { "BLES02028", "Syberia Collection" },
+        { "BLUS31429", "Syberia Collection" },
         { "BLES01973", "Worms: The Revolution Collection" },
         // title fixes
         { "BLES00039", "ARMORED CORE 4" },
