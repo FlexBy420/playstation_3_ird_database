@@ -11,3 +11,25 @@ input#filter {
 .custom-width{
     max-width: 1720px;
 }
+
+#scrollToTopBtn{
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 99;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 50%;
+  }
+  #scrollToTopBtn:hover{
+    background-color: #555;
+  }
+  #scrollToTopBtn::after{
+    content: '\25B2';
+  }
