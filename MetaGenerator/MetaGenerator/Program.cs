@@ -61,6 +61,7 @@ await Parallel.ForEachAsync(irdFileList,
                 ird.UpdateVersion,
                 ird.GameVersion,
                 ird.AppVersion,
+                ird.FileCount,
                 relPath
             );
 
@@ -146,6 +147,7 @@ foreach (var (productCode, irdInfoList) in result
             writer.WriteString("game-ver", gameVer);
         if (irdInfo.AppVer is { Length: > 0 } appVer and not "\0\0\0\0\0")
             writer.WriteString("app-ver", appVer);
+            writer.WriteNumber("file-count", irdInfo.FileCount);
 #if DEBUG
         writer.WriteString("ird-crc32", crc.ToString("x8"));
 #endif
