@@ -7,11 +7,12 @@ input#filter {
     cursor: pointer;
     transform: translate(-15px, 15px);
 }
-
 .custom-width{
     max-width: 1720px;
 }
-
+body {
+  font-size: 15px;
+}
 #scrollToTopBtn{
     display: none;
     position: fixed;
