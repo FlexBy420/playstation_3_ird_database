@@ -191,6 +191,7 @@ public static class ProductTitleMapping
         { "BLES00691", "Call of Duty: Modern Warfare 2" },
         { "BLJM60191", "Call of Duty: Modern Warfare 2" },
         { "BLUS30377", "Call of Duty: Modern Warfare 2" },
+        { "BLUS30429", "Call of Duty: Modern Warfare 2" },
         { "BLJS10095", "Disgaea 4" },
         { "BLJS10011", "Disgaea 3" },
         { "BLES00452", "Disgaea 3" },
