@@ -69,7 +69,7 @@ function Filter() {
     }
     filterTimeout = setTimeout(() => {
         const filter = document.getElementById('filter');
-        const val = filter.value?.toLowerCase();
+        const val = filter.value?.toLowerCase().replace(/[-\s]/g, '');
         const table = document.getElementById('table');
         const tbody = table.tBodies[0];
         const stats = document.getElementById('ird_count');
@@ -78,7 +78,8 @@ function Filter() {
             clearButton.classList.remove('d-none');
             let filtered = 0;
             for (const row of tbody.rows) {
-                if (Array.from(row.cells).some(v => v.getAttribute('filter-value')?.includes(val) || v.textContent?.includes(val))) {
+                const codeCellValue = row.cells[0].getAttribute('filter-value').replace(/[-\s]/g, '');
+                if (codeCellValue.includes(val) || Array.from(row.cells).some(v => v.getAttribute('filter-value')?.includes(val) || v.textContent?.includes(val))) {
                     row.classList.remove('d-none');
                     filtered++;
                 }
