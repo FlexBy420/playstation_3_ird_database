@@ -155,6 +155,7 @@ public static class ProductTitleMapping
         { "BLES02028", "Syberia Collection" },
         { "BLUS31429", "Syberia Collection" },
         { "BLES01973", "Worms: The Revolution Collection" },
+        { "BCUS90490", "Sports Champions / Medieval Moves: Deadmund's Quest Combo Disc" },
         // title fixes
         { "BLES00039", "ARMORED CORE 4" },
         { "BLJM60012", "ARMORED CORE 4" },
