@@ -119,6 +119,7 @@ public static class ProductTitleMapping
         { "BLJM61283", "ファイナルファンタジーⅩⅣ　オンライン： 蒼天のイシュガルド" },
         { "BLJM85001", "モンスター・ハンター・ポータブル　3rd HD Ver." }, // psp remasters
         { "BLJM85002", "けいおん！ 放課後ライブ！！ HD Ver." },
+        { "BLJM85003", "真・三國無双　Multi Raid 2 HD Version" },
         { "BLJM85004", "英雄伝説　空の軌跡FC:改　HD Edition" },
         { "BLJM85005", "英雄伝説 空の軌跡SC:改 HD EDITION" },
         { "BLJM85006", "英雄伝説　空の軌跡ｔｈｅ　３ｒｄ：改　HD" }, // end psp remasters
