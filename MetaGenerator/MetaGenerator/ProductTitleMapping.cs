@@ -157,6 +157,7 @@ public static class ProductTitleMapping
         { "BLUS31429", "Syberia Collection" },
         { "BLES01973", "Worms: The Revolution Collection" },
         { "BCUS90490", "Sports Champions / Medieval Moves: Deadmund's Quest Combo Disc" },
+        { "BCUS70248", "God of War: Ascension Demo" },
         // title fixes
         { "BLES00039", "ARMORED CORE 4" },
         { "BLJM60012", "ARMORED CORE 4" },
