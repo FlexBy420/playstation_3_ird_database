@@ -75,6 +75,7 @@ public static class ProductTitleMapping
         { "BCED01207", "Official PlayStation Magazine Issue 65: Christmas 2011" },
         { "BCED01208", "Official PlayStation Magazine Issue 66: January 2012" },
         { "BCED01209", "Official PlayStation Magazine Issue 67: February 2012" },
+        { "BCED01515", "Ratchet & Clank: All 4 One Demo" },
         { "BCED01539", "Ratchet & Clank: All 4 One Demo" }, // a demo that comes bundled with zookeeper movie lol, related ids BCED01452, BCED01513, BCUS70170
         { "BCED01564", "Official PlayStation Magazine Issue 69: April 2012" }, // :)
         { "BCED01565", "Official PlayStation Magazine Issue 70: May 2012" },
