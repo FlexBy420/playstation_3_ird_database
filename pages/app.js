@@ -200,3 +200,59 @@ function scrollToTop() {
   document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0;
 }
+
+// sorting functions
+const SORT_ASC = 'asc';
+const SORT_DESC = 'desc';
+
+let sortDirections = {
+    'Product Code': null,
+    'Title': null,
+    'App Version': null,
+    'Game Version': null,
+    'Firmware Version': null,
+    'Files': null
+};
+
+function sortTable(columnIndex, order) {
+    const table = document.getElementById('table');
+    const tbody = table.tBodies[0];
+    const rows = Array.from(tbody.rows);
+
+    rows.sort((a, b) => {
+        let aValue = a.cells[columnIndex].textContent.trim();
+        let bValue = b.cells[columnIndex].textContent.trim();
+
+        if (!isNaN(aValue) && !isNaN(bValue)) {
+            aValue = parseFloat(aValue);
+            bValue = parseFloat(bValue);
+        }
+
+        if (order === SORT_ASC) {
+            return aValue > bValue ? 1 : -1;
+        } else {
+            return aValue < bValue ? 1 : -1;
+        }
+    });
+
+    tbody.innerHTML = '';
+    rows.forEach(row => tbody.appendChild(row));
+}
+
+function handleSort(event) {
+    const columnHeader = event.target.textContent.trim();
+    const columnIndex = Array.from(event.target.parentNode.children).indexOf(event.target);
+    let sortOrder;
+
+    if (sortDirections[columnHeader] === SORT_ASC) {
+        sortOrder = SORT_DESC;
+    } else {
+        sortOrder = SORT_ASC;
+    }
+
+    sortDirections[columnHeader] = sortOrder;
+    event.target.parentNode.querySelectorAll('th').forEach(th => th.classList.remove('sorted-asc', 'sorted-desc'));
+    event.target.classList.add(`sorted-${sortOrder}`);
+    sortTable(columnIndex, sortOrder);
+}
+document.querySelectorAll('#table th').forEach(th => th.addEventListener('click', handleSort));

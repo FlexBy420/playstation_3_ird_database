@@ -34,3 +34,9 @@ body {
   #scrollToTopBtn::after{
     content: '\25B2';
   }
+#table th {
+    cursor: pointer;
+}
+#table th:hover {
+    text-decoration: underline;
+}
