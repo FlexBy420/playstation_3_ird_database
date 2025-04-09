@@ -146,6 +146,7 @@ async function LoadData() {
                 row.insertCell().textContent = irdInfo['game-ver'];
                 row.insertCell().textContent = irdInfo['fw-ver'];
                 row.insertCell().textContent = irdInfo['file-count'];
+                row.insertCell().textContent = irdInfo['size'];
                 row.insertCell().innerHTML = `<a href="${downloadUrlBase}${irdInfo.link}" class="icon-link" download filename="${filename}" rel="external noopener" referrerpolicy="origin"><i class="bi bi-download"></i><span class="d-none d-xl-block"> ${filename}</span></a>`;
                 irdCount++;
             }
