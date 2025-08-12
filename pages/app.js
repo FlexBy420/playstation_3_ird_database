@@ -146,6 +146,11 @@ async function LoadData() {
                 row.insertCell().textContent = irdInfo['game-ver'];
                 row.insertCell().textContent = irdInfo['fw-ver'];
                 row.insertCell().textContent = irdInfo['file-count'];
+                const sizeCell = row.insertCell();
+                const bytes = parseInt(irdInfo['disc-size'], 10);
+                sizeCell.textContent = formatSize(bytes);
+                sizeCell.title = `${bytes.toLocaleString("en-US")} bytes (${formatSize(bytes)})`;
+                sizeCell.setAttribute("data-bytes", bytes);
                 row.insertCell().innerHTML = `<a href="${downloadUrlBase}${irdInfo.link}" class="icon-link" download filename="${filename}" rel="external noopener" referrerpolicy="origin"><i class="bi bi-download"></i><span class="d-none d-xl-block"> ${filename}</span></a>`;
                 irdCount++;
             }
@@ -211,7 +216,8 @@ let sortDirections = {
     'App Version': null,
     'Game Version': null,
     'Firmware Version': null,
-    'Files': null
+    'Files': null,
+    'Size': null
 };
 
 function sortTable(columnIndex, order) {
@@ -220,8 +226,8 @@ function sortTable(columnIndex, order) {
     const rows = Array.from(tbody.rows);
 
     rows.sort((a, b) => {
-        let aValue = a.cells[columnIndex].textContent.trim();
-        let bValue = b.cells[columnIndex].textContent.trim();
+        let aValue = a.cells[columnIndex].getAttribute("data-bytes") || a.cells[columnIndex].textContent.trim();
+        let bValue = b.cells[columnIndex].getAttribute("data-bytes") || b.cells[columnIndex].textContent.trim();
 
         if (!isNaN(aValue) && !isNaN(bValue)) {
             aValue = parseFloat(aValue);
@@ -256,3 +262,11 @@ function handleSort(event) {
     sortTable(columnIndex, sortOrder);
 }
 document.querySelectorAll('#table th').forEach(th => th.addEventListener('click', handleSort));
+
+function formatSize(bytes) {
+    const sizes = ["B", "KB", "MB", "GB", "TB"];
+    if (bytes === 0) return "0 B";
+    const i = Math.floor(Math.log(bytes) / Math.log(1024));
+    const value = bytes / Math.pow(1024, i);
+    return value.toFixed(2) + " " + sizes[i];
+}

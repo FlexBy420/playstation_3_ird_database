@@ -87,6 +87,16 @@ public static class IsoHeaderParser
         }
         return result;
     }
+    public static long GetDiscSizeFromIsoHeader(byte[] isoHeader)
+    {
+    const int blockSize = 2048;
+    int offset = 16 * blockSize; // Primary Volume Descriptor starts at sector 16
+
+    // Volume Space Size = 4 bytes LE at offset + 80
+    uint volumeSpaceSize = BitConverter.ToUInt32(isoHeader, offset + 80);
+
+    return (long)volumeSpaceSize * blockSize;
+    }
 }
 
 public record FileRecord(string TargetFileName, long StartSector, long LengthInSectors, long SizeInBytes, FileRecordInfo FileInfo, DirRecord Parent);

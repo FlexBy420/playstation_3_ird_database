@@ -62,7 +62,8 @@ await Parallel.ForEachAsync(irdFileList,
                 ird.GameVersion,
                 ird.AppVersion,
                 ird.FileCount,
-                relPath
+                relPath,
+                ird.DiscSize
             );
 
             var irdList = result.GetOrAdd(ird.ProductCode, _ => new ConcurrentDictionary<uint, IrdInfo>());
@@ -148,6 +149,7 @@ foreach (var (productCode, irdInfoList) in result
         if (irdInfo.AppVer is { Length: > 0 } appVer and not "\0\0\0\0\0")
             writer.WriteString("app-ver", appVer);
             writer.WriteNumber("file-count", irdInfo.FileCount);
+            writer.WriteNumber("disc-size", irdInfo.DiscSize);
 #if DEBUG
         writer.WriteString("ird-crc32", crc.ToString("x8"));
 #endif

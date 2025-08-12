@@ -39,6 +39,14 @@ public static class IrdParser
             result.Id = reader.ReadInt32();
         result.HeaderLength = reader.ReadInt32();
         result.Header = reader.ReadBytes(result.HeaderLength);
+        using (var headerStream = new MemoryStream(result.Header))
+        using (var gzip = new GZipStream(headerStream, CompressionMode.Decompress))
+        using (var decompressedStream = new MemoryStream())
+        {
+            gzip.CopyTo(decompressedStream);
+            var decompressedIsoHeaderBytes = decompressedStream.ToArray();
+            result.DiscSize = IsoHeaderParser.GetDiscSizeFromIsoHeader(decompressedIsoHeaderBytes);
+        }
         result.FooterLength = reader.ReadInt32();
         result.Footer = reader.ReadBytes(result.FooterLength);
         result.RegionCount = reader.ReadByte();

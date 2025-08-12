@@ -26,6 +26,7 @@ public class Ird
     // Pic for <v9
     public int Uid;
     public uint Crc32;
+    public long DiscSize { get; set; }
 }
 
 public class IrdFile
