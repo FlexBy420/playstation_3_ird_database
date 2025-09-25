@@ -159,6 +159,12 @@ public static class ProductTitleMapping
         { "BLES01973", "Worms: The Revolution Collection" },
         { "BCUS90490", "Sports Champions / Medieval Moves: Deadmund's Quest Combo Disc" },
         { "BCUS70248", "God of War: Ascension Demo" },
+        { "BCUS70150", "Resistance 3 Demo" },
+        { "BCUS98402", "God of War III: E3 2009 Demo" },
+        { "BCED01394", "Resistance 3 Demo" },
+        { "BLUS30974", "Men In Black Demo" },
+        { "BCED01452", "Ratchet & Clank: All 4 One Demo" },
+        { "BCUS70170", "Ratchet & Clank: All 4 One Demo" },
         // title fixes
         { "BLES00039", "ARMORED CORE 4" },
         { "BLJM60012", "ARMORED CORE 4" },
