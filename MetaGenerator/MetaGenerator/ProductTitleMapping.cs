@@ -165,6 +165,7 @@ public static class ProductTitleMapping
         { "BLUS30974", "Men In Black Demo" },
         { "BCED01452", "Ratchet & Clank: All 4 One Demo" },
         { "BCUS70170", "Ratchet & Clank: All 4 One Demo" },
+        { "BLED01457", "LEGO Harry Potter: Years 5-7 Demo" },
         // title fixes
         { "BLES00039", "ARMORED CORE 4" },
         { "BLJM60012", "ARMORED CORE 4" },
