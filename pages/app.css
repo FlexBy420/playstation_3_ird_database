@@ -40,3 +40,16 @@ body {
 #table th:hover {
     text-decoration: underline;
 }
+#source_filter_list,
+#region_filter_list {
+    min-width: 220px;
+}
+#source_filter_list .dropdown-item,
+#region_filter_list .dropdown-item {
+    cursor: pointer;
+}
+#source_filter_list label,
+#region_filter_list label {
+    cursor: pointer;
+    width: 100%;
+}
