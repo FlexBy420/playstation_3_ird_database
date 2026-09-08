@@ -5,6 +5,7 @@ on:
       - main
     paths:
       - '**.ird'
+      - 'dkeys/**'
       - 'pages/**'
       - 'MetaGenerator/**'
   workflow_dispatch:
